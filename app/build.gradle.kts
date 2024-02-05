@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    val lifecycleVersion = "2.6.2"
     val glideVersion = "4.12.0"
     val coroutinesVersion = "1.6.4"
     val livedataVersion = "2.4.0"
@@ -51,12 +52,15 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
+
     // Glide
     implementation("com.github.bumptech.glide:glide:$glideVersion")
     kapt("com.github.bumptech.glide:compiler:$glideVersion")
 
-    //Coroutines
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
 
     // LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$livedataVersion")
@@ -64,10 +68,10 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
 
-    // Gson for RetroFit
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    // Gson
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
 
-    //Lifecycle Runtime
+    // Lifecycle Runtime
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleruntimektxVersion")
 
     testImplementation("junit:junit:4.13.2")
