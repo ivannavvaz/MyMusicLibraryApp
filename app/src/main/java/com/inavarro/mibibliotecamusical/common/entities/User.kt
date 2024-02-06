@@ -10,5 +10,5 @@ data class User(
     val gender: String,
     val birthday: Date,
     val country: String,
-    val code: String
+    val zipCode: String
 )
