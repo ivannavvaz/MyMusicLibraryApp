@@ -45,7 +45,6 @@ class AuthActivity : AppCompatActivity() {
 
         val service = retrofit.create(LoginService::class.java)
 
-        // Con Corrutinas
         lifecycleScope.launch {
             try {
                 if (user.contains("@")) {
