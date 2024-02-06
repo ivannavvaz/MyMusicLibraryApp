@@ -1,3 +1,5 @@
-package com.inavarro.mibibliotecamusical.common
+package com.inavarro.mibibliotecamusical.common.retrofit.login
 
-data class LoginResponse(var token: String): SuccessResponse(token)
+import com.inavarro.mibibliotecamusical.common.retrofit.SuccessResponse
+
+data class LoginResponse(var ok: String): SuccessResponse(ok)

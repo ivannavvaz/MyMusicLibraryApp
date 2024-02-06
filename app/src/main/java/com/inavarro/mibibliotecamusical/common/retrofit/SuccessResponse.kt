@@ -1,3 +1,3 @@
-package com.inavarro.mibibliotecamusical.common
+package com.inavarro.mibibliotecamusical.common.retrofit
 
-open class SuccessResponse(token: String)
+open class SuccessResponse(succes: Any)
