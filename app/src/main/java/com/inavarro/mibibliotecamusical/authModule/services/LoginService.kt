@@ -10,11 +10,11 @@ import retrofit2.http.POST
 
 interface LoginService {
     @Headers("Content-Type: application/json")
-    @POST(Constants.BASE_URL + Constants.USER_PATH)
+    @POST(Constants.BASE_URL + Constants.LOGINBYUSENAME_PATH)
     suspend fun loginUserByUsername(@Body data: UserInfoUsername): LoginResponse
 
     @Headers("Content-Type: application/json")
-    @POST(Constants.BASE_URL + Constants.USER_PATH)
+    @POST(Constants.BASE_URL + Constants.LOGINBYEMAIL_PATH)
     suspend fun loginUserByEmail(@Body data: UserInfoEmail): LoginResponse
 
 }
