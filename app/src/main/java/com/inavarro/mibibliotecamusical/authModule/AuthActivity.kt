@@ -4,13 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.authModule.services.LoginService
 import com.inavarro.mibibliotecamusical.common.Constants
-import com.inavarro.mibibliotecamusical.common.entities.UserInfoEmail
-import com.inavarro.mibibliotecamusical.common.entities.UserInfoUsername
+import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoEmail
+import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoUsername
 import com.inavarro.mibibliotecamusical.databinding.ActivityAuthBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -49,8 +50,13 @@ class AuthActivity : AppCompatActivity() {
             try {
                 if (user.contains("@")) {
                     val result = service.loginUserByEmail(UserInfoEmail(user, password))
+                    val user = result.body()!!
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
+                    val user = result.body()!!
+                }
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@AuthActivity, "Login success", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 (e as? HttpException)?.let {
