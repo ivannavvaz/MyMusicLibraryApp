@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.common.entities
+package com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user
 
 import com.google.gson.annotations.SerializedName
 import com.inavarro.mibibliotecamusical.common.Constants
