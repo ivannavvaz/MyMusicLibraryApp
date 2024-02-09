@@ -2,6 +2,7 @@ package com.inavarro.mibibliotecamusical.authModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.inavarro.mibibliotecamusical.authModule.services.LoginService
@@ -53,6 +54,7 @@ class AuthActivity : AppCompatActivity() {
                     val user = result.body()!!
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
+                    Log.d("AuthActivity", "login: ${result.body()}")
                     val user = result.body()!!
                 }
                 withContext(Dispatchers.Main) {
