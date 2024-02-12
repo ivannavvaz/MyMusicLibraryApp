@@ -5,4 +5,5 @@
     <string name="home_title">Home</string>
     <string name="search_title">Search</string>
     <string name="library_title">Library</string>
+    <string name="menu_add">Nueva playlist</string>
 </resources>
