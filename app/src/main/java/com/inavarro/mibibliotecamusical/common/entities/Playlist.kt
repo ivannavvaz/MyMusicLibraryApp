@@ -4,9 +4,9 @@ import java.util.Date
 
 data class Playlist(
     val id: Long,
-    val title: String,
-    val songsNumber: Int,
-    val creationDate: Date,
-    val user: User,
-    val followerUser: MutableList<User>
+    val titulo: String,
+    val numeroCanciones: Int,
+    val fechaCreacion: Date,
+    val usuario: User,
+    val usuarioSeguidor: MutableList<User>
 )

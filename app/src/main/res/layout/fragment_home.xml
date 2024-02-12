@@ -8,9 +8,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlaylists"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
+        tools:listitem="@layout/item_playlist"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -18,9 +19,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPodcasts"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
+        tools:listitem="@layout/item_podcast"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvPlaylists"
@@ -28,13 +30,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAlbums"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
+        tools:listitem="@layout/item_album"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rvPodcasts"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
