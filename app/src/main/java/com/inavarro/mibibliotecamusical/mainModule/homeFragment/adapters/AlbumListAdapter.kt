@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -11,7 +13,8 @@ import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.entities.Album
 import com.inavarro.mibibliotecamusical.databinding.ItemAlbumBinding
 
-class AlbumsAdapter(private var albums: MutableList<Album>, private val listener: OnClickListener): RecyclerView.Adapter<AlbumsAdapter.ViewHolder>() {
+class AlbumListAdapter(private val listener: OnClickListener):
+    ListAdapter<Album, RecyclerView.ViewHolder>(AlbumDiffCallBack()) {
 
     private lateinit var context: Context
 
@@ -33,12 +36,10 @@ class AlbumsAdapter(private var albums: MutableList<Album>, private val listener
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = albums.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val album = getItem(position)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val album = albums.get(position)
-
-        with(holder) {
+        with(holder as ViewHolder) {
             setListener(album)
 
             binding.tvAlbumName.text = album.titulo
@@ -52,8 +53,13 @@ class AlbumsAdapter(private var albums: MutableList<Album>, private val listener
         }
     }
 
-    fun setAlbums(albums: List<Album>) {
-        this.albums = albums as MutableList<Album>
-        notifyDataSetChanged()
+    class AlbumDiffCallBack: DiffUtil.ItemCallback<Album>() {
+        override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+            return oldItem == newItem
+        }
     }
 }

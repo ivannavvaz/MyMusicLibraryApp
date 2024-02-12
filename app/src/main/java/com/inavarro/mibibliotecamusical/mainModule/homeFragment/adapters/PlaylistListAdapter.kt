@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -11,7 +13,8 @@ import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.databinding.ItemPlaylistBinding
 
-class PlaylistsAdapter(private var playlists: MutableList<Playlist>, private val listener: OnClickListener): RecyclerView.Adapter<PlaylistsAdapter.ViewHolder>() {
+class PlaylistListAdapter(private val listener: OnClickListener):
+    ListAdapter<Playlist, RecyclerView.ViewHolder>(PlaylistDiffCallBack()) {
 
     private lateinit var context: Context
 
@@ -25,7 +28,7 @@ class PlaylistsAdapter(private var playlists: MutableList<Playlist>, private val
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaylistsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
 
         val view = LayoutInflater.from(context).inflate(R.layout.item_playlist, parent, false)
@@ -33,12 +36,10 @@ class PlaylistsAdapter(private var playlists: MutableList<Playlist>, private val
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = playlists.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val playlist = getItem(position)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val playlist = playlists.get(position)
-
-        with(holder) {
+        with(holder as ViewHolder) {
             setListener(playlist)
 
             binding.tvPlaylistName.text = playlist.titulo
@@ -52,8 +53,13 @@ class PlaylistsAdapter(private var playlists: MutableList<Playlist>, private val
         }
     }
 
-    fun setPlaylists(playlists: List<Playlist>) {
-        this.playlists = playlists as MutableList<Playlist>
-        notifyDataSetChanged()
+    class PlaylistDiffCallBack: DiffUtil.ItemCallback<Playlist>() {
+        override fun areItemsTheSame(oldItem: Playlist, newItem: Playlist): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Playlist, newItem: Playlist): Boolean {
+            return oldItem == newItem
+        }
     }
 }

@@ -4,15 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
-import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.entities.Podcast
 import com.inavarro.mibibliotecamusical.databinding.ItemPodcastBinding
 
-class PodcastsAdapter(private var podcasts: MutableList<Podcast>, private val listener: OnClickListener): RecyclerView.Adapter<PodcastsAdapter.ViewHolder>() {
+class PodcastListAdapter(private val listener: OnClickListener):
+    ListAdapter<Podcast, RecyclerView.ViewHolder>(PodcastDiffCallBack()) {
 
     private lateinit var context: Context
 
@@ -26,7 +28,7 @@ class PodcastsAdapter(private var podcasts: MutableList<Podcast>, private val li
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PodcastsAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
 
         val view = LayoutInflater.from(context).inflate(R.layout.item_podcast, parent, false)
@@ -34,12 +36,10 @@ class PodcastsAdapter(private var podcasts: MutableList<Podcast>, private val li
         return ViewHolder(view)
     }
 
-    override fun getItemCount(): Int = podcasts.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val podcast = getItem(position)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val podcast = podcasts.get(position)
-
-        with(holder) {
+        with(holder as ViewHolder) {
             setListener(podcast)
 
             binding.tvPodcastName.text = podcast.titulo
@@ -53,8 +53,13 @@ class PodcastsAdapter(private var podcasts: MutableList<Podcast>, private val li
         }
     }
 
-    fun setPodcasts(podcasts: List<Podcast>) {
-        this.podcasts = podcasts as MutableList<Podcast>
-        notifyDataSetChanged()
+    class PodcastDiffCallBack: DiffUtil.ItemCallback<Podcast>() {
+        override fun areItemsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: Podcast, newItem: Podcast): Boolean {
+            return oldItem == newItem
+        }
     }
 }
