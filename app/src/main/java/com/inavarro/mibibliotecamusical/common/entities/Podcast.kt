@@ -4,9 +4,9 @@ import java.util.Date
 
 data class Podcast(
     val id: Long,
-    val title: String,
-    val image: String,
+    val titulo: String,
+    val imagen: String,
     val description: String,
-    val year: Date,
-    val user: User
+    val anyo: Date,
+    val usuario: User
 )

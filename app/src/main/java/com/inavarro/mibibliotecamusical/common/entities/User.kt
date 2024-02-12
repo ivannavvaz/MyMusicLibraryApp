@@ -7,8 +7,8 @@ data class User(
     val username: String,
     val password: String,
     val email: String,
-    val gender: String,
-    val birthday: Date,
-    val country: String,
-    val zipCode: String
+    val genero: String,
+    val fechaNacimiento: Date,
+    val pais: String,
+    val codigoPostal: String
 )
