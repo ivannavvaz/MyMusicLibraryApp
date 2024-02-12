@@ -9,7 +9,7 @@ object Constants {
 
     const val USUARIO_PATH = "/usuario"
     const val PLAYLISTS_PATH = "/playlists"
-    const val PODCAST_PATH = "/podcats"
+    const val PODCAST_PATH = "/podcasts"
     const val ALBUMS_PATH = "/albums"
 
     // RESULTADOS
