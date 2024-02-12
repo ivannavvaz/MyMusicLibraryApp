@@ -16,11 +16,11 @@ import retrofit2.http.Path
 interface HomeService {
 
     @GET(Constants.BASE_URL + Constants.USUARIO_PATH + "/{id_user}" + Constants.PLAYLISTS_PATH)
-    suspend fun getPlaylistUser(@Path("id_user") iduser: Int): Response<MutableList<Playlist>>
+    suspend fun getPlaylistUser(@Path("id_user") iduser: Long): Response<MutableList<Playlist>>
 
-    @GET(Constants.BASE_URL + Constants.USUARIO_PATH + Constants.PODCAST_PATH)
-    suspend fun getPodcastUser(): Response<MutableList<Podcast>>
+    @GET(Constants.BASE_URL + Constants.USUARIO_PATH + "/{id_user}" + Constants.PODCAST_PATH)
+    suspend fun getPodcastUser(@Path("id_user") iduser: Long): Response<MutableList<Podcast>>
 
-    @GET(Constants.BASE_URL + Constants.USUARIO_PATH + Constants.ALBUMS_PATH)
-    suspend fun getAlbumstUser(): Response<MutableList<Album>>
+    @GET(Constants.BASE_URL + Constants.USUARIO_PATH + "/{id_user}" + Constants.ALBUMS_PATH)
+    suspend fun getAlbumstUser(@Path("id_user") iduser: Long): Response<MutableList<Album>>
 }
