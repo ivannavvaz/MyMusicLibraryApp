@@ -49,18 +49,24 @@ class AuthActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             try {
+
+                if (user.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(this@AuthActivity, "Empty fields", Toast.LENGTH_SHORT).show()
+                    return@launch
+                }
+
                 if (user.contains("@")) {
                     val result = service.loginUserByEmail(UserInfoEmail(user, password))
                     val user = result.body()!!
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
-                    Log.d("AuthActivity", "login: ${result.body()}")
                     val user = result.body()!!
                 }
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@AuthActivity, "Login success", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
+                Log.e("Error", e.toString())
                 (e as? HttpException)?.let {
                     when(it.code()) {
                         400 -> {
