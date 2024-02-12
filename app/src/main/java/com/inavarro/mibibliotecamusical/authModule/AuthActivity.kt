@@ -59,10 +59,11 @@ class AuthActivity : AppCompatActivity() {
 
                 if (user.contains("@")) {
                     val result = service.loginUserByEmail(UserInfoEmail(user, password))
-                    val user = result.body()!!
+                    val userLoged = result.body()!!
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
-                    val user = result.body()!!
+                    val userLoged = result.body()!!
+                    Log.i("AUTH", userLoged.toString())
                 }
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@AuthActivity, "Login success", Toast.LENGTH_SHORT).show()
