@@ -64,8 +64,13 @@ class HomeFragment : Fragment(), OnClickListener {
         mAlbumsAdapter = AlbumListAdapter(this)
 
         mLinearlayoutPlaylist = LinearLayoutManager(this.context)
+        mLinearlayoutPlaylist.orientation = LinearLayoutManager.HORIZONTAL
+
         mLinearlayoutPodcast = LinearLayoutManager(this.context)
+        mLinearlayoutPodcast.orientation = LinearLayoutManager.HORIZONTAL
+
         mLinearlayoutAlbum = LinearLayoutManager(this.context)
+        mLinearlayoutAlbum.orientation = LinearLayoutManager.HORIZONTAL
 
         mBinding.rvPlaylists.apply {
             setHasFixedSize(true)
@@ -111,11 +116,7 @@ class HomeFragment : Fragment(), OnClickListener {
             try {
                 val result = service.getPlaylistUser(1) // Aquí debería ir el id del usuario
 
-                Log.d("PLAYLISTS", result.toString())
-
                 val playlists = result.body()!!
-
-                Log.d("PLAYLISTS", playlists.toString())
 
                 mPlaylistsListAdapter.submitList(playlists)
 
@@ -138,11 +139,7 @@ class HomeFragment : Fragment(), OnClickListener {
             try {
                 val result = service.getPodcastUser(1) // Aquí debería ir el id del usuario
 
-                Log.d("PODCASTS", result.toString())
-
                 val podcasts = result.body()!!
-
-                Log.d("PODCASTS", podcasts.toString())
 
                 mPodcastsListAdapter.submitList(podcasts)
 
@@ -165,11 +162,7 @@ class HomeFragment : Fragment(), OnClickListener {
             try {
                 val result = service.getAlbumstUser(1) // Aquí debería ir el id del usuario
 
-                Log.d("ALBUMS", result.toString())
-
                 val albums = result.body()!!
-
-                Log.d("ALBUMS", albums.toString())
 
                 mAlbumsAdapter.submitList(albums)
 

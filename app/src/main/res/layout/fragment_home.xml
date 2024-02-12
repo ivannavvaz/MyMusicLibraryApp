@@ -9,7 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPlaylists"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:orientation="horizontal"
         tools:listitem="@layout/item_playlist"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,7 +20,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPodcasts"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:orientation="horizontal"
         tools:listitem="@layout/item_podcast"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvAlbums"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="140dp"
         android:orientation="horizontal"
         tools:listitem="@layout/item_album"
         app:layout_constraintStart_toStartOf="parent"
