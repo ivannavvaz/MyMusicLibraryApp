@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.authModule.services.LoginService
 import com.inavarro.mibibliotecamusical.common.Constants
@@ -30,6 +32,11 @@ class HomeFragment : Fragment(), OnClickListener {
     private lateinit var mPlaylistsAdapter: PlaylistsAdapter
     private lateinit var mPodcastsAdapter: PodcastsAdapter
     private lateinit var mAlbumsAdapter: AlbumsAdapter
+    private lateinit var mLinearlayoutPlaylist: LinearLayoutManager
+    private lateinit var mLinearlayoutPodcast: LinearLayoutManager
+    private lateinit var mLinearlayoutAlbum: LinearLayoutManager
+
+    private lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,19 +44,48 @@ class HomeFragment : Fragment(), OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        return mBinding.root
 
+        return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //mLayoutManager = LinearLayoutManager(requireContext())
+
+        setupRecyclerViews()
+
         getPlaylist()
+        getPodcasts()
+        getAlbums()
     }
 
     private fun setupRecyclerViews() {
         mPlaylistsAdapter = PlaylistsAdapter(mutableListOf(), this)
         mPodcastsAdapter = PodcastsAdapter(mutableListOf(), this)
         mAlbumsAdapter = AlbumsAdapter(mutableListOf(), this)
+
+        mLinearlayoutPlaylist = LinearLayoutManager(this.context)
+        mLinearlayoutPodcast = LinearLayoutManager(this.context)
+        mLinearlayoutAlbum = LinearLayoutManager(this.context)
+
+        mBinding.rvPlaylists.apply {
+            setHasFixedSize(true)
+            layoutManager = mLinearlayoutPlaylist
+            adapter = mPlaylistsAdapter
+        }
+
+        mBinding.rvPodcasts.apply {
+            setHasFixedSize(true)
+            layoutManager = mLinearlayoutPodcast
+            adapter = mPodcastsAdapter
+        }
+
+        mBinding.rvAlbums.apply {
+            setHasFixedSize(true)
+            layoutManager = mLinearlayoutAlbum
+            adapter = mAlbumsAdapter
+        }
     }
 
     override fun onClick(albumEntity: Album) {
@@ -83,10 +119,65 @@ class HomeFragment : Fragment(), OnClickListener {
 
                 Log.d("PLAYLISTS", playlists.toString())
 
-            } catch (e: Exception) {
-                Log.e("ERROR", e.message.toString())
-            }
+                mPlaylistsAdapter.setPlaylists(playlists)
 
+            } catch (e: Exception) {
+                Log.e("SET PLAYLIST ERROR", e.message.toString())
+            }
+        }
+    }
+
+    private fun getPodcasts() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(HomeService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+                val result = service.getPodcastUser(1) // Aquí debería ir el id del usuario
+
+                Log.d("PODCASTS", result.toString())
+
+                val podcasts = result.body()!!
+
+                Log.d("PODCASTS", podcasts.toString())
+
+                mPodcastsAdapter.setPodcasts(podcasts)
+
+            } catch (e: Exception) {
+                Log.e("SET PODCAST ERROR", e.message.toString())
+            }
+        }
+    }
+
+    private fun getAlbums() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(HomeService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+                val result = service.getAlbumstUser(1) // Aquí debería ir el id del usuario
+
+                Log.d("ALBUMS", result.toString())
+
+                val albums = result.body()!!
+
+                Log.d("ALBUMS", albums.toString())
+
+                mAlbumsAdapter.setAlbums(albums)
+
+            } catch (e: Exception) {
+                Log.e("SET ALBUM ERROR", e.message.toString())
+            }
         }
     }
 }
