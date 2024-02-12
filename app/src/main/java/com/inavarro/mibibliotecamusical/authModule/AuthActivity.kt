@@ -1,5 +1,6 @@
 package com.inavarro.mibibliotecamusical.authModule
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoEmail
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoUsername
 import com.inavarro.mibibliotecamusical.databinding.ActivityAuthBinding
+import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -65,6 +67,12 @@ class AuthActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@AuthActivity, "Login success", Toast.LENGTH_SHORT).show()
                 }
+
+                // Change to HomeActivity with user info
+
+                val intent = Intent(this@AuthActivity, MainActivity::class.java)
+                startActivity(intent)
+
             } catch (e: Exception) {
                 Log.e("Error", e.toString())
                 (e as? HttpException)?.let {
