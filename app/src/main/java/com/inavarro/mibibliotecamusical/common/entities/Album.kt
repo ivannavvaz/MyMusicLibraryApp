@@ -10,6 +10,6 @@ data class Album(
     val fechaInicioPatrocinado: Date,
     val fechaFinPatrocinado: Date,
     val anyo: Date,
-    val artitsta: Artist,
+    val artista: Artist,
     val usuario: User
 )
