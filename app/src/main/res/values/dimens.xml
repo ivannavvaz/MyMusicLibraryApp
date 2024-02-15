@@ -2,4 +2,5 @@
 <resources>
     <dimen name="common_min_margin">8dp</dimen>
     <dimen name="common_padding">16dp</dimen>
+    <dimen name="common_padding_min">8dp</dimen>
 </resources>
