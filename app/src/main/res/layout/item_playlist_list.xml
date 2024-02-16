@@ -3,24 +3,36 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/common_min_margin"
     android:padding="@dimen/common_padding">
 
     <ImageView
-        android:id="@+id/playlistImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/ivPlaylistImg"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/tvPlaylistName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/playlistImg"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="Nombre de la playlist"/>
+        android:text="Nombre de la playlist"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/ivPlaylistImg"
+        app:layout_constraintTop_toTopOf="@id/ivPlaylistImg"
+        app:layout_constraintBottom_toTopOf="@id/tvPlaylistAutor" />
+
+    <TextView
+        android:id="@+id/tvPlaylistAutor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Autor"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/ivPlaylistImg"
+        app:layout_constraintBottom_toBottomOf="@id/ivPlaylistImg"
+        app:layout_constraintTop_toBottomOf="@id/tvPlaylistName"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
