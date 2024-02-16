@@ -1,14 +1,20 @@
 package com.inavarro.mibibliotecamusical.mainModule.homeFragment
 
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.marginTop
+import androidx.core.view.setMargins
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Album
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
@@ -22,6 +28,7 @@ import com.inavarro.mibibliotecamusical.mainModule.homeFragment.services.HomeSer
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment(), OnClickListener {
 
@@ -39,7 +46,7 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -56,6 +63,48 @@ class HomeFragment : Fragment(), OnClickListener {
         getPlaylist()
         getPodcasts()
         getAlbums()
+
+        // Set the scroll listener to the scroll view for Sticky Header
+
+        mBinding.svHome.setOnScrollChangeListener(View.OnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
+
+            val scrolled = scrollY - oldScrollY
+            val layoutparams = mBinding.vStatusBar.layoutParams as ViewGroup.MarginLayoutParams
+
+            if (scrollY > oldScrollY) { // Scroll up
+                if (layoutparams.topMargin - scrolled > 0) // Avoid negative values
+                    layoutparams.setMargins(0, layoutparams.topMargin - scrolled, 0, 0)
+                else
+                    layoutparams.setMargins(0, 0, 0, 0)
+
+            } else if (scrollY < oldScrollY) { // Scroll down
+                if (scrollY <= 32 * Resources.getSystem().displayMetrics.density) {
+                    if (scrollY > 0) // Avoid negative values
+                        layoutparams.setMargins(0, layoutparams.topMargin - scrolled, 0, 0)
+                    else { // Set the margin to 32dp when the scroll is 0 or negative
+                        layoutparams.setMargins(
+                            0,
+                            (32 * Resources.getSystem().displayMetrics.density).roundToInt(),
+                            0,
+                            0
+                        )
+                    }
+                }
+            }
+
+            mBinding.vStatusBar.layoutParams = layoutparams // Apply the new margin
+        })
+
+
+        Glide.with(requireContext())
+
+            .load(Constants.DEFAULT_ALBUM_IMAGE)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .centerCrop()
+            .circleCrop()
+            .into(mBinding.ivUser)
+
+
     }
 
     private fun setupRecyclerViews() {
@@ -160,7 +209,7 @@ class HomeFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val result = service.getAlbumstUser(1) // Aquí debería ir el id del usuario
+                val result = service.getAlbumsUser(1) // Aquí debería ir el id del usuario
 
                 val albums = result.body()!!
 

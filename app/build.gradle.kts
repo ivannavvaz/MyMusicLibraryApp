@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     val lifecycleVersion = "2.6.2"
     val glideVersion = "4.12.0"
     val coroutinesVersion = "1.6.4"

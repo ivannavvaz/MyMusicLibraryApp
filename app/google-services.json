@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "706833727547",
+    "project_id": "mibiblitecamusical",
+    "storage_bucket": "mibiblitecamusical.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706833727547:android:1e97ca8644b3b487381c1e",
+        "android_client_info": {
+          "package_name": "com.inavarro.mibibliotecamusical"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoEcEGGIUXC6m6kOcru9mR-whYiNZkFxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706833727547:android:1f2394d42cbfe5cb381c1e",
+        "android_client_info": {
+          "package_name": "com.yago.snapshots"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoEcEGGIUXC6m6kOcru9mR-whYiNZkFxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
