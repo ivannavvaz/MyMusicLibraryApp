@@ -22,5 +22,5 @@ interface HomeService {
     suspend fun getPodcastUser(@Path("id_user") iduser: Long): Response<MutableList<Podcast>>
 
     @GET(Constants.BASE_URL + Constants.USUARIO_PATH + "/{id_user}" + Constants.ALBUMS_PATH)
-    suspend fun getAlbumstUser(@Path("id_user") iduser: Long): Response<MutableList<Album>>
+    suspend fun getAlbumsUser(@Path("id_user") iduser: Long): Response<MutableList<Album>>
 }

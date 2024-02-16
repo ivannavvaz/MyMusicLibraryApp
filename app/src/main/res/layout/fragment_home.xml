@@ -4,39 +4,250 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mainModule.homeFragment.HomeFragment">
+    tools:context=".mainModule.homeFragment.HomeFragment"
+    android:background="@color/md_theme_dark_inverseOnSurface"
+    android:backgroundTint="@color/md_theme_dark_background"
+    android:backgroundTintMode="src_atop"
+    >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPlaylists"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_playlist"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <View
+        android:id="@+id/vStatusBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/rvPodcasts"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPodcasts"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:orientation="horizontal"
-        tools:listitem="@layout/item_podcast"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPlaylists"
-        app:layout_constraintBottom_toTopOf="@id/rvAlbums"/>
+        android:layout_marginTop="@dimen/status_bar_margin"
+        android:translationZ="@dimen/to_front_z_value"
+        android:background="@color/md_theme_dark_inverseOnSurface"
+        android:backgroundTint="@color/md_theme_dark_background"
+        android:backgroundTintMode="src_atop"
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAlbums"
+        />
+
+    <LinearLayout
+        android:id="@+id/llBar"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        tools:listitem="@layout/item_album"
+        android:paddingStart="@dimen/common_padding"
+        android:paddingEnd="@dimen/common_padding"
+        app:layout_constraintTop_toBottomOf="@id/vStatusBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvPodcasts"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:translationZ="90dp"
+        android:background="@color/md_theme_dark_inverseOnSurface"
+        android:backgroundTint="@color/md_theme_dark_background"
+        android:backgroundTintMode="src_atop"
+
+        >
+
+        <ImageView
+            android:id="@+id/ivUser"
+            android:layout_width="@dimen/user_image_size"
+            android:layout_height="@dimen/user_image_size"
+            android:contentDescription="@string/imagen_de_usuario"
+            android:layout_marginTop="@dimen/user_image_margin"
+            android:layout_marginBottom="@dimen/user_image_margin"
+            android:background="@color/md_theme_dark_inverseOnSurface"
+            android:backgroundTint="@color/md_theme_dark_background"
+            android:backgroundTintMode="src_atop"
+            />
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="0dp"
+            android:layout_height="@dimen/chip_height"
+            android:layout_marginStart="@dimen/chip_margin"
+            android:layout_marginEnd="@dimen/chip_margin"
+            android:layout_weight="1"
+            >
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_title"
+                android:textColor="@color/white"
+                android:checkable="true"
+                android:checked="true"
+                app:chipCornerRadius="@dimen/chip_max_corner_radius"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_title"
+                android:textColor="@color/white"
+                android:checkable="true"
+                android:checked="true"
+                app:chipCornerRadius="@dimen/chip_max_corner_radius"
+                />
+
+            <com.google.android.material.chip.Chip
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/home_title"
+                android:textColor="@color/white"
+                android:checkable="true"
+                android:checked="true"
+                app:chipCornerRadius="@dimen/chip_max_corner_radius"
+                />
+
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:id="@+id/svHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/md_theme_dark_inverseOnSurface"
+        android:backgroundTint="@color/md_theme_dark_background"
+        android:backgroundTintMode="src_atop"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/md_theme_dark_inverseOnSurface"
+            android:backgroundTint="@color/md_theme_dark_background"
+            android:backgroundTintMode="src_atop"
+            >
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginTop="98dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:columnCount="2"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                >
+                
+
+            </GridLayout>
+
+            <TextView
+                android:id="@+id/tvPlaylistsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tus_playlists"
+                android:maxLines="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvPlaylists"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginTop="98dp"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:textSize="@dimen/home_fragment_title_text_size"
+                android:textStyle="bold"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPlaylists"
+                android:layout_width="match_parent"
+                android:layout_height="178dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_playlist"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvPodcastsTitle"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+            <TextView
+                android:id="@+id/tvPodcastsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/escucha_los_podcasts_que_te_gustan"
+                android:maxLines="1"
+                app:layout_constraintTop_toBottomOf="@id/tvPlaylistsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvPodcasts"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginTop="@dimen/common_max_margin"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:textSize="@dimen/home_fragment_title_text_size"
+                android:textStyle="bold"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPodcasts"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_podcast"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPlaylistsTitle"
+                app:layout_constraintBottom_toTopOf="@id/tvAlbumsTitle"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+            <TextView
+                android:id="@+id/tvAlbumsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sum_rgete_en_tus_lbumes"
+                android:maxLines="1"
+                app:layout_constraintTop_toBottomOf="@id/tvPodcastsTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvAlbums"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/common_margin"
+                android:layout_marginTop="@dimen/common_max_margin"
+                android:layout_marginBottom="@dimen/common_margin"
+                android:textSize="@dimen/home_fragment_title_text_size"
+                android:textStyle="bold"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvAlbums"
+                android:layout_width="match_parent"
+                android:layout_height="218dp"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_album"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPodcastsTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@color/md_theme_dark_inverseOnSurface"
+                android:backgroundTint="@color/md_theme_dark_background"
+                android:backgroundTintMode="src_atop"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

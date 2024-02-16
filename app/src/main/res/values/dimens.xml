@@ -2,4 +2,32 @@
 <resources>
     <dimen name="common_min_margin">8dp</dimen>
     <dimen name="common_padding">16dp</dimen>
+    <dimen name="common_margin">16dp</dimen>
+    <dimen name="common_max_margin">32dp</dimen>
+    <dimen name="common_max_padding">32dp</dimen>
+    <dimen name="common_min_padding">8dp</dimen>
+    <dimen name="common_text_size">16sp</dimen>
+    <dimen name="common_max_text_size">32sp</dimen>
+    <dimen name="common_min_text_size">8sp</dimen>
+    <dimen name="common_icon_size">24dp</dimen>
+    <dimen name="common_max_icon_size">48dp</dimen>
+    <dimen name="common_min_icon_size">12dp</dimen>
+    <dimen name="common_elevation">4dp</dimen>
+    <dimen name="common_max_elevation">8dp</dimen>
+    <dimen name="common_min_elevation">2dp</dimen>
+    <dimen name="common_corner_radius">4dp</dimen>
+    <dimen name="common_max_corner_radius">8dp</dimen>
+    <dimen name="common_min_corner_radius">2dp</dimen>
+    <dimen name="common_stroke_width">1dp</dimen>
+    <dimen name="common_max_stroke_width">2dp</dimen>
+    <dimen name="common_min_stroke_width">0.5dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="home_fragment_title_text_size">24sp</dimen>
+    <dimen name="chip_max_corner_radius">32dp</dimen>
+    <dimen name="user_image_margin">8dp</dimen>
+    <dimen name="chip_height">48dp</dimen>
+    <dimen name="chip_margin">10dp</dimen>
+    <dimen name="user_image_size">32dp</dimen>
+    <dimen name="status_bar_margin">32dp</dimen>
+    <dimen name="to_front_z_value">90dp</dimen>
 </resources>

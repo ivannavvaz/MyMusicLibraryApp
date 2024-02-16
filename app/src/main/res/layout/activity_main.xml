@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".mainModule.MainActivity">
+    tools:context=".mainModule.MainActivity"
+    android:background="@color/md_theme_dark_background"
+    >
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
@@ -13,7 +15,8 @@
         app:menu="@menu/bottom_nav_menu"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <FrameLayout
         android:id="@+id/hostFragment"
@@ -22,6 +25,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav" />
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        android:background="@color/md_theme_dark_inverseOnSurface"
+        android:backgroundTint="@color/md_theme_dark_background"
+        android:backgroundTintMode="src_atop"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,7 @@
 package com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
+import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.databinding.ItemPlaylistBinding
+import kotlin.math.roundToInt
 
 class PlaylistListAdapter(private val listener: OnClickListener):
     ListAdapter<Playlist, RecyclerView.ViewHolder>(PlaylistDiffCallBack()) {
@@ -39,17 +42,33 @@ class PlaylistListAdapter(private val listener: OnClickListener):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val playlist = getItem(position)
 
+        if (position == 0) {
+            // Add padding 16dp to the first item
+            val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
+            layoutParams.setMargins((16 * Resources.getSystem().displayMetrics.density).roundToInt(), 0, 0, 0)
+            holder.itemView.layoutParams = layoutParams
+        } else {
+            val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
+            layoutParams.setMargins(0, 0, 0, 0)
+            holder.itemView.layoutParams = layoutParams
+        }
+
         with(holder as ViewHolder) {
             setListener(playlist)
 
-            binding.tvPlaylistName.text = playlist.titulo
-
             Glide.with(context)
-                .load("https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png")
+                .load(Constants.DEFAULT_PLAYLIST_IMAGE)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .circleCrop()
                 .into(binding.ivPlaylist)
+
+            if (playlist.titulo.length > 11) {
+                val titulo = playlist.titulo.substring(0, 11) + "..."
+                binding.tvPlaylistName.text = titulo
+            } else {
+                binding.tvPlaylistName.text = playlist.titulo
+            }
+
         }
     }
 

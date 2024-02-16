@@ -2,6 +2,7 @@ package com.inavarro.mibibliotecamusical.mainModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.inavarro.mibibliotecamusical.R
@@ -23,6 +24,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         setupBottomNav()
+
+        if (mBinding.root.background != null)
+            Log.e("MainActivity", mBinding.root.background.toString())
+
+        else if (mBinding.hostFragment.background != null)
+            Log.e("MainActivity", mBinding.hostFragment.background.toString())
+        else if (mBinding.bottomNav.background != null)
+            Log.e("MainActivity", mBinding.bottomNav.background.toString())
+
+
+        else
+            Log.e("MainActivity", "No background")
+
     }
 
     private fun setupBottomNav() {
