@@ -12,6 +12,7 @@ object Constants {
 
     const val USUARIO_PATH = "/usuario"
     const val PLAYLISTS_PATH = "/playlists"
+    const val PLAYLIST_PATH = "/playlist"
     const val PODCASTS_PATH = "/podcasts"
     const val ALBUMS_PATH = "/albums"
     const val SONGS_PATH = "/canciones"

@@ -34,6 +34,7 @@
             />
 
         <TextView
+            android:id="@+id/tvPlaylistUser"
             android:layout_width="@dimen/zero"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/common_min_margin"

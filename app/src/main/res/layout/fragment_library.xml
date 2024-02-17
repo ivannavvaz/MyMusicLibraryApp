@@ -6,16 +6,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainModule.libraryFragment.LibraryFragment">
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/states_playlist_format"
+        android:buttonTint="@color/seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableTint="@color/seed"
+        app:buttonIconTint="@color/seed"
+        app:buttonIcon="@drawable/states_playlist_format"
+
+        />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rvListFormat"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/common_padding"
         tools:listitem="@layout/item_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbFormat"
         app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvGridFormat"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/common_padding"
+        tools:listitem="@layout/item_playlist"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbFormat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabNewPlaylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_add"
+        app:maxImageSize="60dp"
+        android:backgroundTint="@color/seed"
+        android:layout_margin="8dp"
+
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
