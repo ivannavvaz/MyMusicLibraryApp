@@ -6,6 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainModule.libraryFragment.LibraryFragment">
 
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbFormat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/states_playlist_format"
+        android:buttonTint="@color/seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
@@ -14,7 +24,7 @@
         tools:listitem="@layout/item_playlist_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbFormat"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
