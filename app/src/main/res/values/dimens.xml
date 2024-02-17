@@ -30,4 +30,5 @@
     <dimen name="user_image_size">32dp</dimen>
     <dimen name="status_bar_margin">32dp</dimen>
     <dimen name="to_front_z_value">90dp</dimen>
+    <dimen name="common_padding_min">8dp</dimen>
 </resources>

@@ -12,8 +12,9 @@ object Constants {
 
     const val USUARIO_PATH = "/usuario"
     const val PLAYLISTS_PATH = "/playlists"
-    const val PODCAST_PATH = "/podcasts"
+    const val PODCASTS_PATH = "/podcasts"
     const val ALBUMS_PATH = "/albums"
+    const val SONGS_PATH = "/canciones"
 
     // RESULTADOS
     const val EMAIL_PARAM = "email"
@@ -24,4 +25,5 @@ object Constants {
     const val DEFAULT_ALBUM_IMAGE = "https://pngimg.com/uploads/vinyl/vinyl_PNG92.png"
     const val DEFAULT_PLAYLIST_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
     const val DEFAULT_PODCAST_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
+    const val DEFAULT_SONG_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
 }
