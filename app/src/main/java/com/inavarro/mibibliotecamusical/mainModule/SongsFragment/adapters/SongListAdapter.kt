@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters
+package com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters
 
 import android.content.Context
 import android.content.res.Resources
@@ -12,22 +12,21 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
-import com.inavarro.mibibliotecamusical.common.entities.Playlist
+import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
-import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.LibraryFragment
 import kotlin.math.roundToInt
 
-class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
-    ListAdapter<Playlist, RecyclerView.ViewHolder>(PlaylistDiffCallBack()) {
+class SongListAdapter(private val listener: OnClickListener):
+    ListAdapter<Song, RecyclerView.ViewHolder>(PlaylistDiffCallBack()) {
 
         private lateinit var context: Context
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val binding = ItemListBinding.bind(view)
 
-            fun setListener(playlistEntity: Playlist) {
+            fun setListener(song: Song) {
                 with(binding.root) {
-                    setOnClickListener { listener.onClick(playlistEntity) }
+                    setOnClickListener { listener.onClick(song) }
                 }
             }
         }
@@ -41,7 +40,7 @@ class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            val playlist = getItem(position)
+            val song = getItem(position)
 
             if (position == 0) {
                 // Add padding 16dp to the first item
@@ -55,7 +54,7 @@ class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
             }
 
             with(holder as ViewHolder) {
-                setListener(playlist)
+                setListener(song)
 
                 Glide.with(context)
                     .load(Constants.DEFAULT_PLAYLIST_IMAGE)
@@ -63,24 +62,24 @@ class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
                     .centerCrop()
                     .into(binding.imageView)
 
-                if (playlist.titulo.length > 50) {
-                    val titulo = playlist.titulo.substring(0, 50) + "..."
+                if (song.titulo.length > 50) {
+                    val titulo = song.titulo.substring(0, 50) + "..."
                     binding.tvName.text = titulo
                 } else {
-                    binding.tvName.text = playlist.titulo
+                    binding.tvName.text = song.titulo
                 }
 
-                binding.tvType.text = playlist.usuario.username
+                binding.tvType.text = song.album.artista.nombre
 
             }
         }
 
-        class PlaylistDiffCallBack: DiffUtil.ItemCallback<Playlist>() {
-            override fun areItemsTheSame(oldItem: Playlist, newItem: Playlist): Boolean {
+        class PlaylistDiffCallBack: DiffUtil.ItemCallback<Song>() {
+            override fun areItemsTheSame(oldItem: Song, newItem: Song): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Playlist, newItem: Playlist): Boolean {
+            override fun areContentsTheSame(oldItem: Song, newItem: Song): Boolean {
                 return oldItem == newItem
             }
         }

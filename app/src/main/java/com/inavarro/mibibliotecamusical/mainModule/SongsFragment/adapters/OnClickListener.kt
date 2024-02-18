@@ -1,8 +1,8 @@
-package com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters
+package com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters
 
-import com.inavarro.mibibliotecamusical.common.entities.Playlist
+import com.inavarro.mibibliotecamusical.common.entities.Song
 
 interface OnClickListener {
 
-    fun onClick(playlistEntity: Playlist)
+    fun onClick(songEntity: Song)
 }
