@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.authModule.services.LoginService
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoEmail
@@ -60,9 +61,11 @@ class AuthActivity : AppCompatActivity() {
                 if (user.contains("@")) {
                     val result = service.loginUserByEmail(UserInfoEmail(user, password))
                     val userLoged = result.body()!!
+                    UserApplication.user = userLoged
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
                     val userLoged = result.body()!!
+                    UserApplication.user = userLoged
                     Log.i("AUTH", userLoged.toString())
                 }
                 withContext(Dispatchers.Main) {
