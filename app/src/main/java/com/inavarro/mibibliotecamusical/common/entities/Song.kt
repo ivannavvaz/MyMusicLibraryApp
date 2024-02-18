@@ -6,7 +6,5 @@ data class Song(
     val duracion: Int,
     val ruta: String,
     val numeroReproducciones: Int,
-    val album: Album,
-    val usuario: MutableList<User>,
-    val premiumUsuario: MutableList<User>
+    val album: Album
 )

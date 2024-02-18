@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Album
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
@@ -163,7 +164,7 @@ class HomeFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val result = service.getPlaylistUser(1) // Aquí debería ir el id del usuario
+                val result = service.getPlaylistUser(UserApplication.user.id) // Aquí debería ir el id del usuario
 
                 val playlists = result.body()!!
 

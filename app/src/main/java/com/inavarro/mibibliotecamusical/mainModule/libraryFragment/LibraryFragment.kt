@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.R
+import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.databinding.FragmentLibraryBinding
@@ -108,7 +109,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val result = service.getPlaylistUser(1) // Aquí debería ir el id del usuario
+                val result = service.getPlaylistUser(UserApplication.user.id)
 
                 val playlists = result.body()!!
 
