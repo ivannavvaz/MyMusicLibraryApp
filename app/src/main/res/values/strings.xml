@@ -17,4 +17,5 @@
     <string name="imagen_podcast">Imagen Podcast</string>
     <string name="imagen_de_usuario">Imagen de usuario</string>
     <string name="arg_playlist_id">playlistId</string>
+    <string name="none" />
 </resources>

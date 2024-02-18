@@ -2,16 +2,15 @@ package com.inavarro.mibibliotecamusical.mainModule.SongsFragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
-import com.inavarro.mibibliotecamusical.databinding.FragmentLibraryBinding
 import com.inavarro.mibibliotecamusical.databinding.FragmentSongsBinding
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.SongListAdapter
@@ -29,6 +28,7 @@ class SongsFragment : Fragment(), OnClickListener {
     private lateinit var mLinearlayout: LinearLayoutManager
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +36,10 @@ class SongsFragment : Fragment(), OnClickListener {
         // Inflate the layout for this fragment
         mBinding = FragmentSongsBinding.inflate(inflater, container, false)
 
-        //val idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id), 0)
+        mBinding.btnBack.setOnClickListener {
+            onDestroy()
+        }
+
         return mBinding.root
     }
 
@@ -111,12 +114,21 @@ class SongsFragment : Fragment(), OnClickListener {
                 Log.i("AAAAAAAAAAAA", songs.size.toString())
 
                 mSongListAdapter.submitList(songs)
-                mBinding.tvCanciones.text = songs.size.toString()
+                mBinding.tvCanciones.text = songs.size.toString() + " canciones"
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+
+
+        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
+            .commitAllowingStateLoss()
     }
     override fun onClick(songEntity: Song) {
         TODO("Not yet implemented")
