@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.common.Constants
+import com.inavarro.mibibliotecamusical.common.entities.Album
+import com.inavarro.mibibliotecamusical.common.entities.Playlist
+import com.inavarro.mibibliotecamusical.common.entities.Podcast
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.databinding.FragmentFindBinding
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.ItemListAdapter
@@ -70,10 +73,10 @@ class FindFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val playlist = service.getPlaylists().body()
-                val podcasts = service.getPodcasts().body()
-                val songs = service.getSongs().body()
-                val albums = service.getAlbums().body()
+                val playlist: MutableList<Playlist>? = service.getPlaylists().body()
+                val podcasts: MutableList<Podcast>? = service.getPodcasts().body()
+                val songs: MutableList<Song>? = service.getSongs().body()
+                val albums: MutableList<Album>? = service.getAlbums().body()
 
                 val items = mutableListOf<Any>()
 
