@@ -9,4 +9,9 @@ data class Podcast(
     val description: String,
     val anyo: Date,
     val usuario: User
-)
+) {
+
+    override fun toString(): String {
+        return titulo
+    }
+}

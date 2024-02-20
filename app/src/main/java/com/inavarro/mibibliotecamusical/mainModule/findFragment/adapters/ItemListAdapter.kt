@@ -2,7 +2,6 @@ package com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters
 
 import android.content.Context
 import android.content.res.Resources
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +15,10 @@ import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
+import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
 import kotlin.math.roundToInt
 
-class ItemListAdapter(private val listener: OnClickListener):
+class ItemListAdapter(private val listener: FindFragment):
     ListAdapter<Any, RecyclerView.ViewHolder>(DiffCallBack()) {
 
     private lateinit var context: Context
@@ -42,8 +42,6 @@ class ItemListAdapter(private val listener: OnClickListener):
 
         val view = LayoutInflater.from(context).inflate(R.layout.item_list, parent, false)
 
-        //mBinding = ItemListBinding.bind(view)
-
         return ViewHolder(view)
     }
 
@@ -61,32 +59,26 @@ class ItemListAdapter(private val listener: OnClickListener):
             holder.itemView.layoutParams = layoutParams
         }
 
-        Log.e("ItemListAdapter", "onBindViewHolder: $entity")
-
         with(holder as ViewHolder) {
             setListener(entity)
 
             when (entity) {
                 is com.inavarro.mibibliotecamusical.common.entities.Album -> {
-                    Log.d("ItemListAdapter", "onBindViewHolder: Album")
                     // Cast entity to Album
                     val album = entity as com.inavarro.mibibliotecamusical.common.entities.Album
                     bindAlbum(album, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
-                    Log.d("ItemListAdapter", "onBindViewHolder: Podcast")
                     // Cast entity to Podcast
                     val podcast = entity as com.inavarro.mibibliotecamusical.common.entities.Podcast
                     bindPodcast(podcast, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Song -> {
-                    Log.d("ItemListAdapter", "onBindViewHolder: Song")
                     // Cast entity to Song
                     val song = entity as com.inavarro.mibibliotecamusical.common.entities.Song
                     bindSong(song, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
-                    Log.d("ItemListAdapter", "onBindViewHolder: Playlist")
                     // Cast entity to Playlist
                     val playlist = entity as com.inavarro.mibibliotecamusical.common.entities.Playlist
                     bindPlaylist(playlist, binding)
