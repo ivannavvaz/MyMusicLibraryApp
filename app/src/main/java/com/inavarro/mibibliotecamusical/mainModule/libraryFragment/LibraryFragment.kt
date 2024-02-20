@@ -181,6 +181,8 @@ class LibraryFragment : Fragment(), OnClickListener {
 
                 val result = service.deletePlaylist(UserApplication.user.id, id)
 
+                Log.i("DELETE RESULT", result.toString())
+
                 Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
 
                 mListFormatPlaylistListAdapter.notifyDataSetChanged()

@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.playlist.PlaylistInfo
@@ -22,7 +21,7 @@ import com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.service.N
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
+import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -79,8 +78,8 @@ class NewPlaylistFragment : Fragment() {
 
                 Log.i("PLAYLIST INFO", PlaylistInfo(titulo).toString())
 
-
                 val result = service.createPlaylist(UserApplication.user.id, PlaylistInfo(titulo))
+                Log.i("PLAYLIST RESULT", result.toString())
                 val playlist = result.body()!!
 
 
