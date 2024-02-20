@@ -160,23 +160,87 @@ class ItemListAdapter(private val listener: FindFragment):
             when (oldItem) {
                 is com.inavarro.mibibliotecamusical.common.entities.Album -> {
                     val oldAlbum = oldItem as com.inavarro.mibibliotecamusical.common.entities.Album
-                    val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
-                    return oldAlbum.id == newAlbum.id
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldAlbum.id == newAlbum.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
                     val oldPodcast = oldItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
-                    val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
-                    return oldPodcast.id == newPodcast.id
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldPodcast.id == newPodcast.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Song -> {
                     val oldSong = oldItem as com.inavarro.mibibliotecamusical.common.entities.Song
-                    val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
-                    return oldSong.id == newSong.id
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldSong.id == newSong.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
                     val oldPlaylist = oldItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
-                    val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
-                    return oldPlaylist.id == newPlaylist.id
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                    }
                 }
             }
 
@@ -188,23 +252,87 @@ class ItemListAdapter(private val listener: FindFragment):
             when (oldItem) {
                 is com.inavarro.mibibliotecamusical.common.entities.Album -> {
                     val oldAlbum = oldItem as com.inavarro.mibibliotecamusical.common.entities.Album
-                    val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
-                    return oldAlbum == newAlbum
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldAlbum.id == newAlbum.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldAlbum.id == newAlbum.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
                     val oldPodcast = oldItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
-                    val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
-                    return oldPodcast == newPodcast
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldPodcast.id == newPodcast.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldPodcast.id == newPodcast.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Song -> {
                     val oldSong = oldItem as com.inavarro.mibibliotecamusical.common.entities.Song
-                    val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
-                    return oldSong == newSong
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldSong.id == newSong.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldSong.id == newSong.id
+                        }
+                    }
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
                     val oldPlaylist = oldItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
-                    val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
-                    return oldPlaylist == newPlaylist
+                    when (newItem) {
+                        is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                        is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                            val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                            return oldPlaylist.id == newPlaylist.id
+                        }
+                    }
                 }
             }
             return false
