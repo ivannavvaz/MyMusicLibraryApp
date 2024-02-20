@@ -65,7 +65,6 @@ class PodcastListAdapter(private val listener: OnClickListener):
                 .replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
             imageRoute = "/img/podcast/$imageRoute.png"
 
-            Log.d("Image Route", imageRoute)
 
             val storage = Firebase.storage
             val storageRef = storage.reference
