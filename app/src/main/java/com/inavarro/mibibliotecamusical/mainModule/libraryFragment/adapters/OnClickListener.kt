@@ -5,4 +5,5 @@ import com.inavarro.mibibliotecamusical.common.entities.Playlist
 interface OnClickListener {
 
     fun onClick(playlistEntity: Playlist)
+    fun onLongClick(playlistEntity: Playlist)
 }
