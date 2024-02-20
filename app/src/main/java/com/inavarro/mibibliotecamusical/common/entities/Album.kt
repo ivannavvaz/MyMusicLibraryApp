@@ -12,4 +12,9 @@ data class Album(
     val anyo: Date,
     val artista: Artist,
     val usuario: User
-)
+) {
+
+    override fun toString(): String {
+        return titulo
+    }
+}

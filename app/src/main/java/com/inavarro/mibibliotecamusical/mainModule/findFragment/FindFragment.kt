@@ -85,9 +85,7 @@ class FindFragment : Fragment(), OnClickListener {
                 items.addAll(songs!!)
                 items.addAll(albums!!)
 
-                Log.i("ITEMS", items.toString())
-                //items.sortBy { it::class.simpleName }
-
+                items.sortBy { it.toString() }
                 mListAdapter.submitList(items)
 
             } catch (e: Exception) {

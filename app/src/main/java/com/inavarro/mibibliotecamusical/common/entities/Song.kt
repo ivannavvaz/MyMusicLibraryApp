@@ -7,4 +7,9 @@ data class Song(
     val ruta: String,
     val numeroReproducciones: Int,
     val album: Album
-)
+) {
+
+    override fun toString(): String {
+        return titulo
+    }
+}

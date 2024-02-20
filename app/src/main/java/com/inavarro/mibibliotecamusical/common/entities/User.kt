@@ -11,4 +11,9 @@ data class User(
     val fechaNacimiento: Date,
     val pais: String,
     val codigoPostal: String
-)
+) {
+
+    override fun toString(): String {
+        return username
+    }
+}
