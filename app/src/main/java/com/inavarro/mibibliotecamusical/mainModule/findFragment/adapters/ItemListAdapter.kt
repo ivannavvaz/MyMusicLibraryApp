@@ -10,16 +10,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
+import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
 import kotlin.math.roundToInt
 
-class ItemListAdapter(private val listener: OnClickListener):
+class ItemListAdapter(private val listener: FindFragment):
     ListAdapter<Any, RecyclerView.ViewHolder>(DiffCallBack()) {
 
     private lateinit var context: Context
-    private lateinit var mBinging: ItemListBinding
+    private val storageRef = Firebase.storage.reference
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemListBinding.bind(view)
@@ -35,7 +38,6 @@ class ItemListAdapter(private val listener: OnClickListener):
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        mBinging = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         context = parent.context
 
         val view = LayoutInflater.from(context).inflate(R.layout.item_list, parent, false)
@@ -64,86 +66,147 @@ class ItemListAdapter(private val listener: OnClickListener):
                 is com.inavarro.mibibliotecamusical.common.entities.Album -> {
                     // Cast entity to Album
                     val album = entity as com.inavarro.mibibliotecamusical.common.entities.Album
-                    bindAlbum(album)
+                    bindAlbum(album, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
                     // Cast entity to Podcast
                     val podcast = entity as com.inavarro.mibibliotecamusical.common.entities.Podcast
-                    bindPodcast(podcast)
+                    bindPodcast(podcast, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Song -> {
                     // Cast entity to Song
                     val song = entity as com.inavarro.mibibliotecamusical.common.entities.Song
-                    bindSong(song)
+                    bindSong(song, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
                     // Cast entity to Playlist
                     val playlist = entity as com.inavarro.mibibliotecamusical.common.entities.Playlist
-                    bindPlaylist(playlist)
+                    bindPlaylist(playlist, binding)
                 }
             }
         }
     }
 
-    private fun bindAlbum(album: com.inavarro.mibibliotecamusical.common.entities.Album) {
-        with(mBinging) {
+    private fun bindAlbum(album: com.inavarro.mibibliotecamusical.common.entities.Album, mBinding: ItemListBinding) {
+        with(mBinding) {
             tvName.text = album.titulo
             tvType.text = "Álbum"
         }
 
-        Glide.with(context)
-            .load(Constants.DEFAULT_PLAYLIST_IMAGE)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .centerCrop()
-            .into(mBinging.imageView)
+        setImage(album.imagen, mBinding, Constants.DEFAULT_ALBUM_IMAGE)
+
     }
 
-    private fun bindPodcast(podcast: com.inavarro.mibibliotecamusical.common.entities.Podcast) {
-        with(mBinging) {
+    private fun bindPodcast(podcast: com.inavarro.mibibliotecamusical.common.entities.Podcast, mBinding: ItemListBinding) {
+        with(mBinding) {
             tvName.text = podcast.titulo
             tvType.text = "Podcast"
         }
 
-        Glide.with(context)
-            .load(Constants.DEFAULT_PODCAST_IMAGE)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .centerCrop()
-            .into(mBinging.imageView)
+        var imageRoute = podcast.titulo.replace(" ", "-").lowercase().replace("á", "a")
+            .replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
+        imageRoute = "/img/podcast/$imageRoute.png"
+
+        setImage(imageRoute, mBinding, Constants.DEFAULT_PODCAST_IMAGE)
     }
 
-    private fun bindSong(song: com.inavarro.mibibliotecamusical.common.entities.Song) {
-        with(mBinging) {
+    private fun bindSong(song: com.inavarro.mibibliotecamusical.common.entities.Song, mBinding: ItemListBinding) {
+        with(mBinding) {
             tvName.text = song.titulo
             tvType.text = "Canción"
         }
 
-        Glide.with(context)
-            .load(Constants.DEFAULT_SONG_IMAGE)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .centerCrop()
-            .into(mBinging.imageView)
+        setImage("", mBinding, Constants.DEFAULT_SONG_IMAGE)
     }
 
-    private fun bindPlaylist(playlist: com.inavarro.mibibliotecamusical.common.entities.Playlist) {
-        with(mBinging) {
+    private fun bindPlaylist(playlist: com.inavarro.mibibliotecamusical.common.entities.Playlist, mBinding: ItemListBinding) {
+        with(mBinding) {
             tvName.text = playlist.titulo
             tvType.text = "Playlist"
         }
 
-        Glide.with(context)
-            .load(Constants.DEFAULT_PLAYLIST_IMAGE)
-            .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .centerCrop()
-            .into(mBinging.imageView)
+        setImage("", mBinding, Constants.DEFAULT_PLAYLIST_IMAGE)
+    }
+
+    private fun setImage(imageRoute: String, mBinding: ItemListBinding, fallbackImage: String) {
+
+        if (imageRoute.isEmpty()) {
+            Glide.with(context)
+                .load(fallbackImage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(mBinding.imageView)
+            return
+        }
+
+        storageRef.child(imageRoute).downloadUrl.addOnSuccessListener {
+            Glide.with(context)
+                .load(it)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(mBinding.imageView)
+        }.addOnFailureListener {
+            Glide.with(context)
+                .load(fallbackImage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(mBinding.imageView)
+        }
     }
 
     class DiffCallBack: DiffUtil.ItemCallback<Any>() {
         override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean {
-            return oldItem == newItem
+
+            when (oldItem) {
+                is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                    val oldAlbum = oldItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                    val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                    return oldAlbum.id == newAlbum.id
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                    val oldPodcast = oldItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                    val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                    return oldPodcast.id == newPodcast.id
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                    val oldSong = oldItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                    val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                    return oldSong.id == newSong.id
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                    val oldPlaylist = oldItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                    val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                    return oldPlaylist.id == newPlaylist.id
+                }
+            }
+
+            return false
         }
 
         override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean {
-            //return oldItem == newItem
+
+            when (oldItem) {
+                is com.inavarro.mibibliotecamusical.common.entities.Album -> {
+                    val oldAlbum = oldItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                    val newAlbum = newItem as com.inavarro.mibibliotecamusical.common.entities.Album
+                    return oldAlbum == newAlbum
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
+                    val oldPodcast = oldItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                    val newPodcast = newItem as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                    return oldPodcast == newPodcast
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Song -> {
+                    val oldSong = oldItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                    val newSong = newItem as com.inavarro.mibibliotecamusical.common.entities.Song
+                    return oldSong == newSong
+                }
+                is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
+                    val oldPlaylist = oldItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                    val newPlaylist = newItem as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                    return oldPlaylist == newPlaylist
+                }
+            }
             return false
         }
     }

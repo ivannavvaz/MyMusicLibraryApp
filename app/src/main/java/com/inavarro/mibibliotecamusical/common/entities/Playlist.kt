@@ -9,4 +9,9 @@ data class Playlist(
     val fechaCreacion: Date,
     val usuario: User,
     val usuarioSeguidor: MutableList<User>
-)
+) {
+
+    override fun toString(): String {
+        return titulo
+    }
+}

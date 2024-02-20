@@ -5,4 +5,9 @@ data class Artist(
     val nombre: String,
     val imagen: String,
     val usuario: User
-)
+) {
+
+    override fun toString(): String {
+        return nombre
+    }
+}

@@ -62,11 +62,23 @@ class PlaylistListAdapter(private val listener: OnClickListener):
                 .centerCrop()
                 .into(binding.ivPlaylist)
 
-            if (playlist.titulo.length > 11) {
-                val titulo = playlist.titulo.substring(0, 11) + "..."
+            var titulo = playlist.titulo
+
+            // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+            // If it is the favorite playlist, the title is "Canciones que te gustan"
+            if (titulo != "favorita_1") {
+                titulo = titulo.replace("lista_", "")
+                titulo = titulo.replace("_", " ")
+                titulo = titulo[0].uppercase() + titulo.substring(1)
+            } else {
+                titulo = "Canciones que te gustan"
+            }
+
+            if (titulo.length > 11) {
+                titulo = titulo.substring(0, 11) + "..."
                 binding.tvPlaylistName.text = titulo
             } else {
-                binding.tvPlaylistName.text = playlist.titulo
+                binding.tvPlaylistName.text = titulo
             }
 
         }

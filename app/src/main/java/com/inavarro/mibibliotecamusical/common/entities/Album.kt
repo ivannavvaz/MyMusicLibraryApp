@@ -7,9 +7,14 @@ data class Album(
     val titulo: String,
     val imagen: String,
     val patrocinado: Boolean,
-    val fechaInicioPatrocinado: Date,
-    val fechaFinPatrocinado: Date,
+    val fechaInicioPatrocinio: Date,
+    val fechaFinPatrocinio: Date,
     val anyo: Date,
     val artista: Artist,
     val usuario: User
-)
+) {
+
+    override fun toString(): String {
+        return titulo
+    }
+}
