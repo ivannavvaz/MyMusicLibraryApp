@@ -25,18 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNav()
 
-        if (mBinding.root.background != null)
-            Log.e("MainActivity", mBinding.root.background.toString())
-
-        else if (mBinding.hostFragment.background != null)
-            Log.e("MainActivity", mBinding.hostFragment.background.toString())
-        else if (mBinding.bottomNav.background != null)
-            Log.e("MainActivity", mBinding.bottomNav.background.toString())
-
-
-        else
-            Log.e("MainActivity", "No background")
-
     }
 
     private fun setupBottomNav() {
@@ -53,11 +41,13 @@ class MainActivity : AppCompatActivity() {
                 R.id.hostFragment, libraryFragment,
                 LibraryFragment::class.java.name)
             .hide(libraryFragment).commit()
+
         mFragmentManager.beginTransaction()
             .add(
                 R.id.hostFragment, findFragment,
                 FindFragment::class.java.name)
             .hide(findFragment).commit()
+
         mFragmentManager.beginTransaction()
             .add(
                 R.id.hostFragment, homeFragment,

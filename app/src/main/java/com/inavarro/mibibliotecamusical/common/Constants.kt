@@ -22,6 +22,7 @@ object Constants {
     const val EMAIL_PARAM = "email"
     const val USERNAME_PARAM = "username"
     const val PASSWORD_PARAM = "password"
+    const val TITULO_PARAM = "titulo"
 
     // DEFAULTS IMAGES
     const val DEFAULT_ALBUM_IMAGE = "https://pngimg.com/uploads/vinyl/vinyl_PNG92.png"

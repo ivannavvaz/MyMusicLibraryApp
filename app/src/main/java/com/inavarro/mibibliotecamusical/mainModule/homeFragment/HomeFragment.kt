@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.marginTop
-import androidx.core.view.setMargins
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -25,6 +24,7 @@ import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.AlbumLi
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.PlaylistListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.PodcastListAdapter
+import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.firstElementsListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.services.HomeService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -35,20 +35,21 @@ class HomeFragment : Fragment(), OnClickListener {
 
     private lateinit var mBinding: FragmentHomeBinding
 
+    private lateinit var mfirstElementsListAdapter: firstElementsListAdapter
     private lateinit var mPlaylistsListAdapter: PlaylistListAdapter
     private lateinit var mPodcastsListAdapter: PodcastListAdapter
     private lateinit var mAlbumsAdapter: AlbumListAdapter
+
+    private lateinit var mGridlayoutItemListAdapter: GridLayoutManager
     private lateinit var mLinearlayoutPlaylist: LinearLayoutManager
     private lateinit var mLinearlayoutPodcast: LinearLayoutManager
     private lateinit var mLinearlayoutAlbum: LinearLayoutManager
 
-    private lateinit var mLayoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
         return mBinding.root
@@ -57,9 +58,13 @@ class HomeFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //mLayoutManager = LinearLayoutManager(requireContext())
-
         setupRecyclerViews()
+
+        getFirstElements()
+
+        mBinding.cgHome.setOnCheckedStateChangeListener { _, _ ->
+            getFirstElements()
+        }
 
         getPlaylist()
         getPodcasts()
@@ -109,6 +114,8 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     private fun setupRecyclerViews() {
+
+        mfirstElementsListAdapter = firstElementsListAdapter(this)
         mPlaylistsListAdapter = PlaylistListAdapter(this)
         mPodcastsListAdapter = PodcastListAdapter(this)
         mAlbumsAdapter = AlbumListAdapter(this)
@@ -121,6 +128,16 @@ class HomeFragment : Fragment(), OnClickListener {
 
         mLinearlayoutAlbum = LinearLayoutManager(this.context)
         mLinearlayoutAlbum.orientation = LinearLayoutManager.HORIZONTAL
+
+        mGridlayoutItemListAdapter = GridLayoutManager(this.context, 2)
+        mGridlayoutItemListAdapter.orientation = GridLayoutManager.VERTICAL
+
+
+        mBinding.rvFirstElements.apply {
+            setHasFixedSize(true)
+            layoutManager = mGridlayoutItemListAdapter
+            adapter = mfirstElementsListAdapter
+        }
 
         mBinding.rvPlaylists.apply {
             setHasFixedSize(true)
@@ -168,6 +185,7 @@ class HomeFragment : Fragment(), OnClickListener {
 
                 val playlists = result.body()!!
 
+
                 mPlaylistsListAdapter.submitList(playlists)
 
             } catch (e: Exception) {
@@ -213,7 +231,6 @@ class HomeFragment : Fragment(), OnClickListener {
                 val result = service.getAlbumsUser(1) // Aquí debería ir el id del usuario
 
                 val albums = result.body()!!
-
                 mAlbumsAdapter.submitList(albums)
 
             } catch (e: Exception) {
@@ -221,4 +238,39 @@ class HomeFragment : Fragment(), OnClickListener {
             }
         }
     }
+
+    private fun getFirstElements() {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(HomeService::class.java)
+
+        mfirstElementsListAdapter.clearList()
+
+        lifecycleScope.launch {
+
+            try {
+
+                var result: retrofit2.Response<MutableList<Any>>? = null
+
+                if (mBinding.chipAlbums.isChecked) {
+                    result = service.getAlbumsUser(1) as retrofit2.Response<MutableList<Any>>           // Aquí debería ir el id del usuario
+                } else if (mBinding.chipPlaylists.isChecked) {
+                    result = service.getPlaylistUser(1) as retrofit2.Response<MutableList<Any>>         // Aquí debería ir el id del usuario
+                } else if (mBinding.chipPodcasts.isChecked) {
+                    result = service.getPodcastUser(1) as retrofit2.Response<MutableList<Any>>
+                }
+
+                val firstElements = result?.body()!!
+
+                mfirstElementsListAdapter.submitList(firstElements)
+
+            } catch (e: Exception) {
+                Log.e("SET FIRST ELEMENTS ERROR", e.message.toString())
+            }
+        }
+    }
+
 }
