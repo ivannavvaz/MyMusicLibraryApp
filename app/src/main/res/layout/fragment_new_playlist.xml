@@ -4,32 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".mainModule.NewPlaylistFragment.NewPlaylistFragment"
-    android:background="@color/black">
+    tools:context=".mainModule.NewPlaylistFragment.NewPlaylistFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:icon="@drawable/ic_arrow_back"
-        app:iconSize="30dp"
-        app:iconTint="@color/seed"
-        android:background="@color/none"
-        />
+        >
 
-    <com.google.android.material.button.MaterialButton
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Nueva Playlist"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            app:navigationIcon="@drawable/ic_arrow"
+            app:navigationIconTint="@color/white"
+            app:titleCentered="true"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:icon="@drawable/ic_check"
+        app:layout_constraintBottom_toBottomOf="@id/appBarLayout"
+        android:button="@drawable/ic_check"
         app:iconSize="30dp"
         app:iconTint="@color/seed"
         android:background="@color/none"
         />
+
     <ImageView
         android:id="@+id/imgPhoto"
         android:layout_width="0dp"
@@ -40,8 +51,9 @@
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintDimensionRatio="H, 4:3"/>
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+        app:layout_constraintDimensionRatio="H, 4:3"
+        android:contentDescription="@string/selecctor_de_imagen" />
 
     <ImageButton
         android:id="@+id/btnSelect"
@@ -54,19 +66,17 @@
         app:layout_constraintEnd_toEndOf="@id/imgPhoto"
         app:layout_constraintTop_toTopOf="@id/imgPhoto"
         app:layout_constraintBottom_toBottomOf="@id/imgPhoto"
-        />
+        android:contentDescription="@string/selecctor_de_imagen" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:hint="Título"
+        android:hint="@string/t_tulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnSelect"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/seed"
-        app:boxBackgroundColor="@color/md_theme_light_primaryContainer"
         >
 
         <com.google.android.material.textfield.TextInputEditText
