@@ -11,7 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.lifecycle.lifecycleScope
+import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.playlist.PlaylistInfo
@@ -40,8 +42,9 @@ class NewPlaylistFragment : Fragment() {
 
         mActivity = activity as? MainActivity
 
-        mBinding.btnBack.setOnClickListener {
+        activity?.onBackPressedDispatcher?.addCallback {
             onDestroy()
+
         }
 
         mBinding.btnSave.setOnClickListener {
@@ -111,7 +114,10 @@ class NewPlaylistFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         hideKeyboard()
-        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
-            .commitAllowingStateLoss()
+        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!).commitAllowingStateLoss()
+        requireFragmentManager().beginTransaction().show(requireParentFragment()).commitAllowingStateLoss()
+
     }
+    
+
 }

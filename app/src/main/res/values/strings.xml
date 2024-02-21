@@ -45,4 +45,7 @@
     <string name="mujer">Mujer</string>
     <string name="pa_s">País</string>
     <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
+    <string name="select_image">Select Image</string>
+    <string name="selecctor_de_imagen">Selecctor de imagen</string>
+    <string name="t_tulo">Título</string>
 </resources>

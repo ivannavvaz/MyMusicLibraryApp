@@ -63,7 +63,7 @@ class LibraryFragment : Fragment(), OnClickListener {
 
         }
 
-        mBinding.fabNewPlaylist.setOnClickListener {
+        mBinding.bNewPlaylist.setOnClickListener {
             launchNewPlaylistFragment()
         }
 
@@ -94,7 +94,7 @@ class LibraryFragment : Fragment(), OnClickListener {
 
         mGridFormatGridFormatPlaylistListAdapter = GridFormatPlaylistListAdapter(this)
 
-        mGridlayoutPlaylist = GridLayoutManager(this.context, 2)
+        mGridlayoutPlaylist = GridLayoutManager(this.context, 3)
 
         mBinding.rvGridFormat.apply {
             setHasFixedSize(true)
@@ -144,27 +144,29 @@ class LibraryFragment : Fragment(), OnClickListener {
     }
 
     override fun onLongClick(playlistEntity: Playlist) {
+
         val builder = AlertDialog.Builder(requireContext())
-        //val inflater = requireActivity().layoutInflater
 
+        var titulo = playlistEntity.titulo
 
-        val dialogView = layoutInflater.inflate(R.layout.dialog, null)
+        if (titulo != "favorita_1") {
+            titulo = titulo.replace("lista_", "")
+            titulo = titulo.replace("_", " ")
+            titulo = titulo[0].uppercase() + titulo.substring(1)
+        } else {
+            titulo = "Canciones que te gustan"
+        }
 
-        Log.i("LONG CLICK", playlistEntity.id.toString())
+        builder.setTitle("Eliminar La Playlist $titulo?")
+        builder.setMessage("¿Estás seguro de que quieres eliminar esta playlist?")
+        builder.setPositiveButton("Sí") { _, _ ->
+            deletePlaylist(playlistEntity.id)
+        }
+        builder.setNegativeButton("No") { dialog, _ ->
+            dialog.dismiss()
+        }
 
-
-        builder.setView(dialogView)
-
-            .setPositiveButton("Eliminar"){ dialog, which ->
-                deletePlaylist(playlistEntity.id)
-
-            }
-            .setNegativeButton("Cancelar"){ dialog, which ->
-
-            }
-
-        val alertDialog = builder.create()
-        alertDialog.show()
+        builder.show()
     }
 
     private fun deletePlaylist(id: Long){
@@ -200,7 +202,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         if(args != null) fragment.arguments = args
 
         val fragmentManager = getFragmentManager()
-        val fragmentTransaction = fragmentManager?.beginTransaction()
+        val fragmentTransaction = fragmentManager?.beginTransaction()?.hide(this)
         if (fragmentTransaction != null) {
             fragmentTransaction.add(R.id.navHostFragment, fragment)
             fragmentTransaction.commit()
