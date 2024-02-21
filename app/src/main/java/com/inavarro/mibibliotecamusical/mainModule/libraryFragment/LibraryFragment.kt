@@ -146,7 +146,7 @@ class LibraryFragment : Fragment(), OnClickListener {
             fragmentTransaction.addToBackStack(null)
         }
          */
-
+        Log.i("ABRIR PLAYLIST", playlistEntity.id.toString())
         findNavController().navigate(
             LibraryFragmentDirections.actionLibraryFragmentToSongsFragment(playlistEntity.id)
         )
