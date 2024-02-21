@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.R
@@ -128,6 +129,7 @@ class LibraryFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(playlistEntity: Playlist) {
+        /*
         val fragment = SongsFragment()
         val bundle = Bundle()
         bundle.putLong("playlistId", playlistEntity.id)
@@ -141,12 +143,16 @@ class LibraryFragment : Fragment(), OnClickListener {
 
             fragmentTransaction.addToBackStack(null)
         }
+         */
+
+        findNavController().navigate(
+            LibraryFragmentDirections.actionLibraryFragmentToSongsFragment(playlistEntity.id)
+        )
     }
 
     override fun onLongClick(playlistEntity: Playlist) {
         val builder = AlertDialog.Builder(requireContext())
         //val inflater = requireActivity().layoutInflater
-
 
         val dialogView = layoutInflater.inflate(R.layout.dialog, null)
 
@@ -194,19 +200,9 @@ class LibraryFragment : Fragment(), OnClickListener {
         }
     }
 
-    private fun launchNewPlaylistFragment(args: Bundle? = null){
-        val fragment = NewPlaylistFragment()
-
-        if(args != null) fragment.arguments = args
-
-        val fragmentManager = getFragmentManager()
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        if (fragmentTransaction != null) {
-            fragmentTransaction.add(R.id.navHostFragment, fragment)
-            fragmentTransaction.commit()
-
-            fragmentTransaction.addToBackStack(null)
-        }
-
+    private fun launchNewPlaylistFragment(){
+        findNavController().navigate(
+            LibraryFragmentDirections.actionLibraryFragmentToNewPlaylistFragment()
+        )
     }
 }

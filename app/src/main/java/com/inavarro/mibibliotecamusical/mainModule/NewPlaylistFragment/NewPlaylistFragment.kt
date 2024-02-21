@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.playlist.PlaylistInfo
@@ -41,7 +42,7 @@ class NewPlaylistFragment : Fragment() {
         mActivity = activity as? MainActivity
 
         mBinding.btnBack.setOnClickListener {
-            onDestroy()
+            launchLibraryFragment()
         }
 
         mBinding.btnSave.setOnClickListener {
@@ -87,7 +88,7 @@ class NewPlaylistFragment : Fragment() {
                     Toast.makeText(requireContext(), playlist.titulo + " creada.", Toast.LENGTH_SHORT).show()
                 }
 
-                onDestroy()
+                launchLibraryFragment()
 
             } catch (e: Exception) {
                 Log.e("CREA PLAYLIST", e.toString() + e.cause)
@@ -108,10 +109,9 @@ class NewPlaylistFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        hideKeyboard()
-        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
-            .commitAllowingStateLoss()
+    private fun launchLibraryFragment() {
+        findNavController().navigate(
+            NewPlaylistFragmentDirections.actionNewPlaylistFragmentToLibraryFragment()
+        )
     }
 }

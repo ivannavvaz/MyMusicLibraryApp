@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
@@ -38,7 +39,9 @@ class SongsFragment : Fragment(), OnClickListener {
         mBinding = FragmentSongsBinding.inflate(inflater, container, false)
 
         mBinding.btnBack.setOnClickListener {
-            onDestroy()
+            findNavController().navigate(
+                SongsFragmentDirections.actionSongsFragmentToLibraryFragment()
+            )
         }
 
         return mBinding.root
@@ -47,7 +50,7 @@ class SongsFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id), 0)
+        val idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id))
 
         setupRecyclerView()
 
@@ -55,8 +58,6 @@ class SongsFragment : Fragment(), OnClickListener {
             getPlaylist(idPlaylist)
             getSongs(idPlaylist)
         }
-
-
     }
 
     private fun setupRecyclerView() {
@@ -123,11 +124,6 @@ class SongsFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
-            .commitAllowingStateLoss()
-    }
     override fun onClick(songEntity: Song) {
         TODO("Not yet implemented")
     }
