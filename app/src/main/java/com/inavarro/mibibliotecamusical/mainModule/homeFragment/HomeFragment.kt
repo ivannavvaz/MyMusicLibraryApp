@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.UserApplication
@@ -26,6 +24,7 @@ import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.Playlis
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.PodcastListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.firstElementsListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.services.HomeService
+import com.inavarro.mibibliotecamusical.mainModule.homeFragment.services.SinginService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -256,11 +255,11 @@ class HomeFragment : Fragment(), OnClickListener {
                 var result: retrofit2.Response<MutableList<Any>>? = null
 
                 if (mBinding.chipAlbums.isChecked) {
-                    result = service.getAlbumsUser(1) as retrofit2.Response<MutableList<Any>>           // Aquí debería ir el id del usuario
+                    result = service.getAlbumsUser(UserApplication.user.id) as retrofit2.Response<MutableList<Any>>
                 } else if (mBinding.chipPlaylists.isChecked) {
-                    result = service.getPlaylistUser(1) as retrofit2.Response<MutableList<Any>>         // Aquí debería ir el id del usuario
+                    result = service.getPlaylistUser(UserApplication.user.id) as retrofit2.Response<MutableList<Any>>
                 } else if (mBinding.chipPodcasts.isChecked) {
-                    result = service.getPodcastUser(1) as retrofit2.Response<MutableList<Any>>
+                    result = service.getPodcastUser(UserApplication.user.id) as retrofit2.Response<MutableList<Any>>
                 }
 
                 val firstElements = result?.body()!!
