@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters
+package com.inavarro.mibibliotecamusical.mainModule.songsFragment.adapters
 
 import android.content.Context
 import android.content.res.Resources
@@ -13,7 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
-import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
 import kotlin.math.roundToInt

@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.SongsFragment.service
+package com.inavarro.mibibliotecamusical.mainModule.songsFragment.service
 
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist

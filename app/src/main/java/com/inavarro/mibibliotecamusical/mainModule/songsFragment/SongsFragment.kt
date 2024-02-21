@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.SongsFragment
+package com.inavarro.mibibliotecamusical.mainModule.songsFragment
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -17,9 +17,9 @@ import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentSongsBinding
-import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.OnClickListener
-import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.SongListAdapter
-import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.service.SongsService
+import com.inavarro.mibibliotecamusical.mainModule.songsFragment.adapters.OnClickListener
+import com.inavarro.mibibliotecamusical.mainModule.songsFragment.adapters.SongListAdapter
+import com.inavarro.mibibliotecamusical.mainModule.songsFragment.service.SongsService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

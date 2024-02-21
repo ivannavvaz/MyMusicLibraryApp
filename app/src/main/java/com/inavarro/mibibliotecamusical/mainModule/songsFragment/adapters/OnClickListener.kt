@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters
+package com.inavarro.mibibliotecamusical.mainModule.songsFragment.adapters
 
 import com.inavarro.mibibliotecamusical.common.entities.Song
 
