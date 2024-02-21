@@ -40,9 +40,9 @@ class NewPlaylistFragment : Fragment() {
 
         mActivity = activity as? MainActivity
 
-        //mBinding.btnBack.setOnClickListener {
-        //    launchLibraryFragment()
-        //}
+        mBinding.cbBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         mBinding.btnSave.setOnClickListener {
             createPlaylist()
