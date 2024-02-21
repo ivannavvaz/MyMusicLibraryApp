@@ -154,7 +154,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         )
     }
 
-    override fun onLongClick(playlistEntity: Playlist) {
+    override fun onLongClick(playlistEntity: Playlist, position: Int) {
 
         val builder = AlertDialog.Builder(requireContext())
 
@@ -171,7 +171,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         builder.setTitle("Eliminar La Playlist $titulo?")
         builder.setMessage("¿Estás seguro de que quieres eliminar esta playlist?")
         builder.setPositiveButton("Sí") { _, _ ->
-            deletePlaylist(playlistEntity.id)
+            deletePlaylist(playlistEntity.id, position)
         }
         builder.setNegativeButton("No") { dialog, _ ->
             dialog.dismiss()
@@ -180,7 +180,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         builder.show()
     }
 
-    private fun deletePlaylist(id: Long){
+    private fun deletePlaylist(id: Long, position: Int){
         val retrofit = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -198,8 +198,7 @@ class LibraryFragment : Fragment(), OnClickListener {
 
                 Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
 
-                mListFormatPlaylistListAdapter.notifyDataSetChanged()
-                mGridFormatGridFormatPlaylistListAdapter.notifyDataSetChanged()
+                getPlaylists()
 
             } catch (e: Exception) {
                 Log.e("DELETE PLAYLIST ERROR", e.message.toString())
