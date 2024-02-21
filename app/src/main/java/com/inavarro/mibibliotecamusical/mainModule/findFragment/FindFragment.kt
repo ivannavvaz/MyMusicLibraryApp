@@ -37,7 +37,7 @@ class FindFragment : Fragment(), OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        items = mutableListOf()
+        items = mutableListOf<Any>()
     }
 
     override fun onCreateView(
@@ -46,6 +46,9 @@ class FindFragment : Fragment(), OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         mBinding = FragmentFindBinding.inflate(inflater, container, false)
+
+
+
         return mBinding.root
     }
 
@@ -53,9 +56,7 @@ class FindFragment : Fragment(), OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerViews()
-
         getItems()
-
         setupSearchView()
     }
     private fun setupRecyclerViews() {
@@ -107,12 +108,10 @@ class FindFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val playlist: MutableList<Playlist>? = service.getPlaylists().body()
-                val podcasts: MutableList<Podcast>? = service.getPodcasts().body()
-                val songs: MutableList<Song>? = service.getSongs().body()
-                val albums: MutableList<Album>? = service.getAlbums().body()
-
-                items = mutableListOf<Any>()
+                val playlist = service.getPlaylists().body()
+                val podcasts = service.getPodcasts().body()
+                val songs = service.getSongs().body()
+                val albums = service.getAlbums().body()
 
                 items.addAll(playlist!!)
                 items.addAll(podcasts!!)

@@ -115,14 +115,27 @@ class ItemListAdapter(private val listener: FindFragment):
             tvName.text = song.titulo
             tvType.text = "Canción"
         }
-
-        setImage("", mBinding, Constants.DEFAULT_SONG_IMAGE)
+        setImage(song.album.imagen, mBinding, Constants.DEFAULT_SONG_IMAGE)
     }
 
     private fun bindPlaylist(playlist: com.inavarro.mibibliotecamusical.common.entities.Playlist, mBinding: ItemListBinding) {
         with(mBinding) {
-            tvName.text = playlist.titulo
-            tvType.text = "Playlist"
+
+            var titulo = playlist.titulo
+            var tipo = "Playlist • " + playlist.usuario.username
+
+            if (titulo != "favorita_1") {
+                titulo = titulo.replace("lista_", "")
+                titulo = titulo.replace("_", " ")
+                titulo = titulo[0].uppercase() + titulo.substring(1)
+            } else {
+                titulo = "Canciones que te gustan"
+                tipo = "Playlist • " + playlist.numeroCanciones + " canciones"
+            }
+
+            tvName.text = titulo
+            tvType.text = tipo
+
         }
 
         setImage("", mBinding, Constants.DEFAULT_PLAYLIST_IMAGE)

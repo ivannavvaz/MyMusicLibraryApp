@@ -79,9 +79,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         mBinding.rvGridFormat.visibility = GONE
-
         setupRecyclerView()
-
         getPlaylists()
     }
 
@@ -159,6 +157,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         val builder = AlertDialog.Builder(requireContext())
 
         var titulo = playlistEntity.titulo
+        var tipo = "Playlist • " + playlistEntity.usuario.username
 
         if (titulo != "favorita_1") {
             titulo = titulo.replace("lista_", "")
@@ -166,6 +165,7 @@ class LibraryFragment : Fragment(), OnClickListener {
             titulo = titulo[0].uppercase() + titulo.substring(1)
         } else {
             titulo = "Canciones que te gustan"
+            tipo = "Playlist • " + playlistEntity.numeroCanciones + " canciones"
         }
 
         builder.setTitle("Eliminar La Playlist $titulo?")
