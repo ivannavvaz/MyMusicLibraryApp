@@ -1,6 +1,5 @@
 package com.inavarro.mibibliotecamusical.mainModule.findFragment
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,17 +9,15 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Album
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.entities.Podcast
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentFindBinding
-import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment
+import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.ItemListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.OnClickListener
-import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.BottomSheetDialogAddToPlaylistFragment
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.services.FindService
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.PlaylistListAdapter
 import kotlinx.coroutines.launch
@@ -37,7 +34,6 @@ class FindFragment : Fragment(), OnClickListener {
 
     private lateinit var items: MutableList<Any>
 
-    private lateinit var mPlaylistsListAdapter: PlaylistListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +58,6 @@ class FindFragment : Fragment(), OnClickListener {
 
         setupSearchView()
     }
-
     private fun setupRecyclerViews() {
         mListAdapter = ItemListAdapter(this)
 
@@ -78,9 +73,9 @@ class FindFragment : Fragment(), OnClickListener {
 
     override fun onClick(songEntity: Song) {
         val bundle = Bundle()
-        bundle.putLong("songId", songEntity.id)
+        bundle.putLong("songIdSelected", songEntity.id)
 
-        launchBottomSheetDialogFragment(bundle)
+        (activity as? MainActivity)?.showBottomSheetDialog(bundle)
     }
 
     /*
@@ -141,7 +136,7 @@ class FindFragment : Fragment(), OnClickListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 val filteredList = items.filter {
-                    it.toString().toLowerCase().contains(newText.toString().toLowerCase())
+                    it.toString().lowercase().contains(newText.toString().lowercase())
                 }
 
                 mBinding.rvFindFragment.scrollToPosition(0)
@@ -150,23 +145,5 @@ class FindFragment : Fragment(), OnClickListener {
                 return true
             }
         })
-    }
-
-    private fun launchBottomSheetDialogFragment(args: Bundle? = null) {
-        val fragment = BottomSheetDialogAddToPlaylistFragment()
-
-        if(args != null) fragment.arguments = args
-
-        val fragmentManager = getFragmentManager()
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        if (fragmentTransaction != null) {
-            fragmentTransaction.add(com.inavarro.mibibliotecamusical.R.id.flBottomSetDialog, fragment)
-            fragmentTransaction.commit()
-
-            fragmentTransaction.addToBackStack(null)
-        }
-
-        val navBar = requireActivity().findViewById<BottomNavigationView>(com.inavarro.mibibliotecamusical.R.id.bottomNav)
-        navBar.visibility = View.GONE
     }
 }

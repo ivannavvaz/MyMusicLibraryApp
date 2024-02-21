@@ -15,6 +15,7 @@ import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.databinding.FragmentBottomSheetDialogAddToPlaylistBinding
+import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.adapters.PlaylistListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.services.BottomSheetDialogService
@@ -45,19 +46,26 @@ class BottomSheetDialogAddToPlaylistFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        idSongSelected = arguments?.getLong(getString(R.string.arg_song_id), 0)!!
-
         mBinding.idViewTop.setOnClickListener {
-            onDestroy()
+            (activity as? MainActivity)?.hideBottomSheetDialog()
         }
 
         mBinding.idBtnDismiss.setOnClickListener {
-            onDestroy()
+            (activity as? MainActivity)?.hideBottomSheetDialog()
         }
 
         setupRecyclerViews()
 
         getPlaylistUser()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (arguments != null) {
+            idSongSelected = arguments?.getLong(getString(R.string.arg_songSelected_id), 0)!!
+            Log.d("BottomSheetDialog", "onViewCreated: $idSongSelected")
+        }
+
     }
 
     private fun setupRecyclerViews() {

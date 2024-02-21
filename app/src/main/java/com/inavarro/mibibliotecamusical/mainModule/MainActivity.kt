@@ -3,14 +3,20 @@ package com.inavarro.mibibliotecamusical.mainModule
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.inavarro.mibibliotecamusical.R
+import com.inavarro.mibibliotecamusical.authModule.authFragment.AuthFragment
+import com.inavarro.mibibliotecamusical.authModule.loginFragment.LoginFragment
+import com.inavarro.mibibliotecamusical.authModule.singinFragment.SinginFragment
 import com.inavarro.mibibliotecamusical.databinding.ActivityMainBinding
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
+import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.BottomSheetDialogAddToPlaylistFragment
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.HomeFragment
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.LibraryFragment
 
@@ -19,13 +25,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityMainBinding
 
     private lateinit var mFragmentManager: FragmentManager
-    private lateinit var mActiveFragment: Fragment
+
+    private val bottomSheetDialog = BottomSheetDialogAddToPlaylistFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
+        mFragmentManager = supportFragmentManager
+
+        mFragmentManager.beginTransaction()
+            .add(
+                R.id.navHostFragment, bottomSheetDialog,
+                BottomSheetDialogAddToPlaylistFragment::class.java.name)
+            .hide(bottomSheetDialog).commit()
         //setupBottomNav()
 
         val hostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -33,51 +48,21 @@ class MainActivity : AppCompatActivity() {
         mBinding.bottomNav.setupWithNavController(navController)
     }
 
-    private fun setupBottomNav() {
-        mFragmentManager = supportFragmentManager
+    fun showBottomSheetDialog(bundle: Bundle) {
 
-        val homeFragment = HomeFragment()
-        val findFragment = FindFragment()
-        val libraryFragment = LibraryFragment()
+        // Set the bundle arguments to the bottomSheetDialog
 
-        mActiveFragment = homeFragment
+        Log.d("MainActivity", "showBottomSheetDialog: $bundle")
 
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.navHostFragment, libraryFragment,
-                LibraryFragment::class.java.name)
-            .hide(libraryFragment).commit()
-
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.navHostFragment, findFragment,
-                FindFragment::class.java.name)
-            .hide(findFragment).commit()
-
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.navHostFragment, homeFragment,
-                HomeFragment::class.java.name).commit()
-
-        mBinding.bottomNav.setOnItemSelectedListener {
-            when(it.itemId) {
-                R.id.homeFragment -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(homeFragment).commit()
-                    mActiveFragment = homeFragment
-                    true
-                }
-                R.id.findFragment -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(findFragment).commit()
-                    mActiveFragment = findFragment
-                    true
-                }
-                R.id.libraryFragment -> {
-                    mFragmentManager.beginTransaction().hide(mActiveFragment).show(libraryFragment).commit()
-                    mActiveFragment = libraryFragment
-                    true
-                }
-                else -> false
-            }
-        }
+        bottomSheetDialog.arguments = bundle
+        mFragmentManager.beginTransaction().show(bottomSheetDialog).commit()
+        mBinding.bottomNav.visibility = View.GONE
     }
+
+    fun hideBottomSheetDialog() {
+        mFragmentManager.beginTransaction().hide(bottomSheetDialog).commit()
+        mBinding.bottomNav.visibility = View.VISIBLE
+    }
+
+
 }

@@ -7,6 +7,12 @@
     tools:context=".authModule.AuthActivity"
     android:orientation="vertical">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+>
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -20,12 +26,25 @@
             android:layout_height="wrap_content"
             app:title="Iniciar sesión"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
-            app:navigationIcon="@drawable/ic_arrow"
             app:navigationIconTint="@color/white"
             app:titleCentered="true"
             />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cbBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/ic_arrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/appBarLayout"
+        app:buttonTint="@android:color/white"
+        android:layout_marginStart="@dimen/common_min_margin"
+        />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvUser"

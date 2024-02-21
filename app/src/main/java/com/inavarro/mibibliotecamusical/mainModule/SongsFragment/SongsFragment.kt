@@ -38,7 +38,7 @@ class SongsFragment : Fragment(), OnClickListener {
         // Inflate the layout for this fragment
         mBinding = FragmentSongsBinding.inflate(inflater, container, false)
 
-        mBinding.btnBack.setOnClickListener {
+        mBinding.cbBack.setOnClickListener {
             findNavController().navigate(
                 SongsFragmentDirections.actionSongsFragmentToLibraryFragment()
             )
@@ -113,8 +113,6 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 val songs = result.body()!!
 
-                Log.i("AAAAAAAAAAAA", songs.size.toString())
-
                 mSongListAdapter.submitList(songs)
                 mBinding.tvCanciones.text = songs.size.toString() + " canciones"
 
@@ -130,21 +128,16 @@ class SongsFragment : Fragment(), OnClickListener {
 
     override fun onLongClick(songEntity: Song) {
         val builder = AlertDialog.Builder(requireContext())
-        //val inflater = requireActivity().layoutInflater
-
 
         val dialogView = layoutInflater.inflate(R.layout.dialog, null)
 
-        //Log.println(Log.ASSERT, "LONG CLICK", "AAAAAAAAAAAAA")
-
-
         builder.setView(dialogView)
 
-            .setPositiveButton("Eliminar"){ dialog, which ->
+            .setPositiveButton("Eliminar"){ _, _ ->
                 deleteSong(songEntity.id)
 
             }
-            .setNegativeButton("Cancelar"){ dialog, which ->
+            .setNegativeButton("Cancelar"){ _, _ ->
 
             }
 
