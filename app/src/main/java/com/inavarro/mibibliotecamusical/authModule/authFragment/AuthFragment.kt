@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
@@ -31,29 +32,37 @@ class AuthFragment : Fragment() {
 
         mBinding.btnLogin.setOnClickListener {
             // Change to login fragment
-            (activity as? AuthActivity)?.toLoginFragment()
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToLoginFragment()
+            )
         }
 
         mBinding.btnGoogle.setOnClickListener {
             // Change to login fragment
-            (activity as? AuthActivity)?.toLoginFragment()
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToLoginFragment()
+            )
         }
 
         mBinding.btnFacebook.setOnClickListener {
             // Change to login fragment
-            (activity as? AuthActivity)?.toLoginFragment()
-
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToLoginFragment()
+            )
         }
 
         mBinding.btnTwitter.setOnClickListener {
             // Change to login fragment
-            (activity as? AuthActivity)?.toLoginFragment()
-
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToLoginFragment()
+            )
         }
 
         mBinding.btnRegister.setOnClickListener {
             // Change to singin fragment
-            (activity as? AuthActivity)?.toSinginFragment()
+            findNavController().navigate(
+                AuthFragmentDirections.actionAuthFragmentToSinginFragment()
+            )
         }
 
         Glide.with(this)
@@ -61,8 +70,5 @@ class AuthFragment : Fragment() {
             .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(mBinding.ivLogo)
-
-
     }
-
 }

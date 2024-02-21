@@ -103,6 +103,4 @@ class LoginFragment : Fragment() {
         val imm = requireActivity().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
-
-
 }
