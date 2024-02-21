@@ -17,6 +17,7 @@ import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.entities.Podcast
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentFindBinding
+import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.ItemListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.BottomSheetDialogAddToPlaylistFragment
@@ -76,6 +77,24 @@ class FindFragment : Fragment(), OnClickListener {
 
         launchBottomSheetDialogFragment(bundle)
     }
+
+    /*
+    override fun onClick(playlist: Playlist) {
+        val fragment = SongsFragment()
+        val bundle = Bundle()
+        bundle.putLong("playlistId", playlist.id)
+        fragment.arguments = bundle
+
+        val fragmentManager = getFragmentManager()
+        val fragmentTransaction = fragmentManager?.beginTransaction()
+        if (fragmentTransaction != null) {
+            fragmentTransaction.add(com.inavarro.mibibliotecamusical.R.id.hostFragment, fragment)
+            fragmentTransaction.commit()
+
+            fragmentTransaction.addToBackStack(null)
+        }
+    }
+     */
 
     private fun getItems() {
         val retrofit = Retrofit.Builder()

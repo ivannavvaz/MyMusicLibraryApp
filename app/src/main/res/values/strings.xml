@@ -18,14 +18,8 @@
     <string name="imagen_de_usuario">Imagen de usuario</string>
     <string name="arg_playlist_id">playlistId</string>
     <string name="none" />
-<<<<<<< HEAD
     <string name="arg_song_id">songId</string>
-=======
-<<<<<<< HEAD
     <string name="eliminar">¿Eliminar playlist?</string>
-=======
     <string name="image">Image</string>
     <string name="canciones_que_te_gustan">Canciones que te gustan</string>
->>>>>>> e07eea520babe1c7d1ccc25c0c1c1d0cf821d2e2
->>>>>>> b1d80b06dd52a1d4bb087c1fe2dfee5670c857be
 </resources>

@@ -5,6 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.databinding.ActivityMainBinding
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
@@ -25,6 +29,14 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNav()
 
+        //val navController = findNavController(R.id.hostFragment)
+        //val appBarConfiguration = AppBarConfiguration(navController.graph)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.hostFragment)
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     private fun setupBottomNav() {

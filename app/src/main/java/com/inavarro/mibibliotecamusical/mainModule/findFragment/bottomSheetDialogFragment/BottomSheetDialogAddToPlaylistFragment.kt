@@ -20,6 +20,7 @@ import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialo
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.services.BottomSheetDialogService
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.services.HomeService
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -106,13 +107,24 @@ class BottomSheetDialogAddToPlaylistFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val result = service.postPlaylistUser(playlistEntity.id, idSongSelected, UserApplication.user.id)
+                val result = service.postPlaylistUser(
+                    playlistEntity.id,
+                    idSongSelected,
+                    UserApplication.user.id
+                )
 
-                Toast.makeText(context, "Canción añadida a la lista de reproducción", Toast.LENGTH_SHORT).show()
-                onDestroy()
+                Toast.makeText(
+                    context,
+                    "Canción añadida a la lista de reproducción",
+                    Toast.LENGTH_SHORT
+                ).show()
 
             } catch (e: Exception) {
-                Log.e("SET PLAYLIST ERROR", e.message.toString())
+                Toast.makeText(
+                    context,
+                    "ERROR: Cancion ya añadida a la lista de reproducción",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
