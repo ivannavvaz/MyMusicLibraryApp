@@ -20,4 +20,27 @@
     <string name="none" />
     <string name="image">Image</string>
     <string name="canciones_que_te_gustan">Canciones que te gustan</string>
+    <string name="iniciar_sesion_con_twitter">Iniciar sesion con Twitter</string>
+    <string name="iniciar_sesion_con_facebook">Iniciar sesion con Facebook</string>
+    <string name="iniciar_sesion">Iniciar sesion</string>
+    <string name="iniciar_sesion_con_google">Iniciar sesion con Google</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="cientos_de_canciones_gratis_en_tu_movil">Cientos de canciones Gratis en tu movil</string>
+    <string name="imagen">Imagen</string>
+    <string name="user_email">User / Email</string>
+    <string name="password">Password</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="correo_electr_nico_o_usuario">Correo electrónico o usuario</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="usuario">Usuario</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="email">Email</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="g_nero">Género</string>
+    <string name="c_digo_postal">Código Postal</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
+    <string name="pa_s">País</string>
+    <string name="fecha_de_nacimiento">Fecha de Nacimiento</string>
 </resources>
