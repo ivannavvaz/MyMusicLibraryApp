@@ -49,6 +49,12 @@ class SinginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getCountries()
 
+        mBinding.cbBack.setOnClickListener {
+            findNavController().navigate(
+                SinginFragmentDirections.actionSinginFragmentToAuthFragment()
+            )
+        }
+
         mBinding.etBirthDate.setOnClickListener {
             showDatePickerDialog()
         }

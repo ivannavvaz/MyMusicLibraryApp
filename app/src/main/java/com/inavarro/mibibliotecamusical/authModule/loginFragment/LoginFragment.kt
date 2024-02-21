@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.authModule.loginFragment.services.LoginService
@@ -36,6 +37,11 @@ class LoginFragment : Fragment() {
     ): View? {
         mBinding = FragmentLoginBinding.inflate(layoutInflater)
 
+        mBinding.cbBack.setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToAuthFragment()
+            )
+        }
 
         mBinding.btnLogin.setOnClickListener {
             login()
