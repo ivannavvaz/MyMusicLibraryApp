@@ -39,6 +39,11 @@ class FindFragment : Fragment(), OnClickListener {
 
     private lateinit var mPlaylistsListAdapter: PlaylistListAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        items = mutableListOf()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
