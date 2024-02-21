@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.authModule.services
+package com.inavarro.mibibliotecamusical.authModule.loginFragment.services
 
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.User

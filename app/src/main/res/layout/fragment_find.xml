@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".mainModule.findFragment.FindFragment"
-    android:layout_margin="@dimen/common_padding_min"
     android:orientation="vertical">
 
     <androidx.appcompat.widget.SearchView
