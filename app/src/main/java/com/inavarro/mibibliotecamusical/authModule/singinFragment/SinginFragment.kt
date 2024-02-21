@@ -14,9 +14,11 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.authModule.AuthActivity
+import com.inavarro.mibibliotecamusical.authModule.authFragment.AuthFragmentDirections
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.User
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfo
@@ -217,7 +219,9 @@ class SinginFragment : Fragment() {
                     if (response.isSuccessful) {
                         val finalUser = response.body()
                         Toast.makeText(context, "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
-                        (activity as? AuthActivity)?.toLoginFragment()
+                        findNavController().navigate(
+                            SinginFragmentDirections.actionSinginFragmentToLoginFragment()
+                        )
                     } else {
                         Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show()
                         Log.e("USER", response.errorBody().toString())

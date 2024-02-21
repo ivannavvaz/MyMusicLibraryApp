@@ -71,6 +71,7 @@ class LoginFragment : Fragment() {
                     UserApplication.user = userLoged
                 } else {
                     val result = service.loginUserByUsername(UserInfoUsername(user, password))
+                    Log.i("ERROR SERVICE", result.toString())
                     val userLoged = result.body()!!
                     UserApplication.user = userLoged
                     Log.i("AUTH", userLoged.toString())
@@ -103,6 +104,4 @@ class LoginFragment : Fragment() {
         val imm = requireActivity().getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
-
-
 }

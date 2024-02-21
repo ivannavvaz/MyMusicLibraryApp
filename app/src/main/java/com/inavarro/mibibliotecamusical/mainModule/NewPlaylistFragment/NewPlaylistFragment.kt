@@ -1,7 +1,9 @@
 package com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -30,6 +32,7 @@ class NewPlaylistFragment : Fragment() {
 
     private lateinit var mBinding: FragmentNewPlaylistBinding
     private var mActivity: MainActivity? = null
+    private var mPhotoSelectUri: Uri? = null
 
     private val RC_GALLERY = 18
     override fun onCreateView(
@@ -100,6 +103,17 @@ class NewPlaylistFragment : Fragment() {
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RC_GALLERY)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode:
+    Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == RC_GALLERY) {
+                mPhotoSelectUri = data?.data
+                mBinding.imgPhoto.setImageURI(mPhotoSelectUri)
+            }
+        }
     }
 
     private fun hideKeyboard() {

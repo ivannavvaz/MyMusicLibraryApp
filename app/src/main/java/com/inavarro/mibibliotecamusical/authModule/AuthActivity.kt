@@ -9,12 +9,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.authModule.authFragment.AuthFragment
+import com.inavarro.mibibliotecamusical.authModule.authFragment.AuthFragmentDirections
 import com.inavarro.mibibliotecamusical.authModule.loginFragment.LoginFragment
 import com.inavarro.mibibliotecamusical.authModule.loginFragment.services.LoginService
 import com.inavarro.mibibliotecamusical.authModule.singinFragment.SinginFragment
@@ -43,43 +47,9 @@ class AuthActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         mBinding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mFragmentManager = supportFragmentManager
-        mActiveFragment = authFragment
-
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.frameLayout, authFragment,
-                AuthFragment::class.java.name)
-            .commit()
-
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.frameLayout, singinFragment,
-                SinginFragment::class.java.name)
-            .hide(singinFragment).commit()
-
-        mFragmentManager.beginTransaction()
-            .add(
-                R.id.frameLayout, loginFragment,
-                LoginFragment::class.java.name)
-            .hide(loginFragment).commit()
-
-
+        val hostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragmentAuth) as NavHostFragment
     }
-
-    fun toLoginFragment() {
-        mFragmentManager.beginTransaction().hide(mActiveFragment).show(loginFragment).commit()
-        mActiveFragment = loginFragment
-    }
-
-    fun toSinginFragment() {
-        mFragmentManager.beginTransaction().hide(mActiveFragment).show(singinFragment).commit()
-        mActiveFragment = singinFragment
-    }
-
-
 }
