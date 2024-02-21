@@ -48,6 +48,7 @@ class NewPlaylistFragment : Fragment() {
         }
 
         mBinding.btnSave.setOnClickListener {
+            hideKeyboard()
             createPlaylist()
         }
 

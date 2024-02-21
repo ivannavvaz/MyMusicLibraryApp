@@ -20,6 +20,7 @@ import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentLibraryBinding
+import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.NewPlaylistFragment
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters.GridFormatPlaylistListAdapter
@@ -131,22 +132,6 @@ class LibraryFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(playlistEntity: Playlist) {
-        /*
-        val fragment = SongsFragment()
-        val bundle = Bundle()
-        bundle.putLong("playlistId", playlistEntity.id)
-        fragment.arguments = bundle
-
-        val fragmentManager = getFragmentManager()
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        if (fragmentTransaction != null) {
-            fragmentTransaction.add(R.id.navHostFragment, fragment)
-            fragmentTransaction.commit()
-
-            fragmentTransaction.addToBackStack(null)
-        }
-         */
-        Log.i("ABRIR PLAYLIST", playlistEntity.id.toString())
         findNavController().navigate(
             LibraryFragmentDirections.actionLibraryFragmentToSongsFragment(playlistEntity.id)
         )

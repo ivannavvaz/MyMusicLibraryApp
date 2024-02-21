@@ -37,6 +37,7 @@ object Constants {
     const val DEFAULT_PLAYLIST_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
     const val DEFAULT_PODCAST_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
     const val DEFAULT_SONG_IMAGE = "https://cdn.icon-icons.com/icons2/3001/PNG/512/default_filetype_file_empty_document_icon_187718.png"
+    const val FAVORITE_PLAYLIST_IMAGE = "https://misc.scdn.co/liked-songs/liked-songs-300.png"
 
     // EXTRAS
 

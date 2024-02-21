@@ -51,9 +51,6 @@ class MainActivity : AppCompatActivity() {
     fun showBottomSheetDialog(bundle: Bundle) {
 
         // Set the bundle arguments to the bottomSheetDialog
-
-        Log.d("MainActivity", "showBottomSheetDialog: $bundle")
-
         bottomSheetDialog.arguments = bundle
         mFragmentManager.beginTransaction().show(bottomSheetDialog).commit()
         mBinding.bottomNav.visibility = View.GONE
