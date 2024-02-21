@@ -28,7 +28,7 @@ class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
             fun setListener(playlistEntity: Playlist) {
                 with(binding.root) {
                     setOnClickListener { listener.onClick(playlistEntity) }
-                    setOnLongClickListener { listener.onLongClick(playlistEntity)
+                    setOnLongClickListener { listener.onLongClick(playlistEntity, position)
                         true }
                 }
             }
