@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/main_nav"
     app:startDestination="@id/homeFragment">
 
     <fragment
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_findFragment"
             app:destination="@id/findFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
     </fragment>
 
     <fragment
@@ -21,14 +24,11 @@
         android:label="Find Fragment"
         tools:layout="@layout/fragment_find">
         <action
-            android:id="@+id/action_findFragment_to_bottomSheetDialogAddToPlaylistFragment"
-            app:destination="@id/bottomSheetDialogAddToPlaylistFragment" />
+            android:id="@+id/action_findFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
         <action
             android:id="@+id/action_findFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
-        <action
-            android:id="@+id/action_findFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -37,14 +37,17 @@
         android:label="Library Fragment"
         tools:layout="@layout/fragment_library">
         <action
+            android:id="@+id/action_libraryFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+        <action
             android:id="@+id/action_libraryFragment_to_newPlaylistFragment"
             app:destination="@id/newPlaylistFragment" />
         <action
             android:id="@+id/action_libraryFragment_to_songsFragment"
             app:destination="@id/songsFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_findFragment"
-            app:destination="@id/findFragment" />
+            android:id="@+id/action_libraryFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -55,6 +58,12 @@
         <action
             android:id="@+id/action_newPlaylistFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_newPlaylistFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+        <action
+            android:id="@+id/action_newPlaylistFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
     <fragment
@@ -65,15 +74,9 @@
         <action
             android:id="@+id/action_songsFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/bottomSheetDialogAddToPlaylistFragment"
-        android:name="com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.BottomSheetDialogAddToPlaylistFragment"
-        android:label="BottomSheetDialogAddToPlaylistFragment" >
         <action
-            android:id="@+id/action_bottomSheetDialogAddToPlaylistFragment_to_findFragment"
-            app:destination="@id/findFragment" />
+            android:id="@+id/action_songsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>

@@ -2,18 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/homeFragment"
         android:title="@string/home_title"
-        android:icon="@drawable/ic_home"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_home" />
     <item
-        android:id="@+id/action_add"
+        android:id="@+id/findFragment"
         android:title="@string/search_title"
-        android:icon="@drawable/ic_search"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_search" />
     <item
-        android:id="@+id/action_profile"
+        android:id="@+id/libraryFragment"
         android:title="@string/library_title"
-        android:icon="@drawable/ic_library"
-        app:showAsAction="never"/>
+        android:icon="@drawable/ic_library" />
 </menu>
