@@ -9,7 +9,10 @@
     <androidx.appcompat.widget.SearchView
         android:id="@+id/searchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_min_margin"
+        android:layout_marginBottom="@dimen/common_min_margin"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFindFragment"

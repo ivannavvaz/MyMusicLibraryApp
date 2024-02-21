@@ -64,6 +64,10 @@ class LibraryFragment : Fragment(), OnClickListener {
 
         }
 
+        mBinding.cbBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         mBinding.bNewPlaylist.setOnClickListener {
             launchNewPlaylistFragment()
         }
