@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.hostFragment)
+        val navController = findNavController(R.id.navHostFragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
@@ -50,19 +50,19 @@ class MainActivity : AppCompatActivity() {
 
         mFragmentManager.beginTransaction()
             .add(
-                R.id.hostFragment, libraryFragment,
+                R.id.navHostFragment, libraryFragment,
                 LibraryFragment::class.java.name)
             .hide(libraryFragment).commit()
 
         mFragmentManager.beginTransaction()
             .add(
-                R.id.hostFragment, findFragment,
+                R.id.navHostFragment, findFragment,
                 FindFragment::class.java.name)
             .hide(findFragment).commit()
 
         mFragmentManager.beginTransaction()
             .add(
-                R.id.hostFragment, homeFragment,
+                R.id.navHostFragment, homeFragment,
                 HomeFragment::class.java.name).commit()
 
         mBinding.bottomNav.setOnItemSelectedListener {

@@ -3,24 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@layout/fragment_home">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.inavarro.mibibliotecamusical.mainModule.homeFragment.HomeFragment"
         android:label="Home Fragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/findFragment"
         android:name="com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment"
         android:label="Find Fragment"
-        tools:layout="@layout/fragment_find"/>
+        tools:layout="@layout/fragment_find">
+        <action
+            android:id="@+id/action_findFragment_to_bottomSheetDialogAddToPlaylistFragment"
+            app:destination="@id/bottomSheetDialogAddToPlaylistFragment" />
+        <action
+            android:id="@+id/action_findFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_findFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/libraryFragment"
         android:name="com.inavarro.mibibliotecamusical.mainModule.libraryFragment.LibraryFragment"
         android:label="Library Fragment"
-        tools:layout="@layout/fragment_library"/>
+        tools:layout="@layout/fragment_library">
+        <action
+            android:id="@+id/action_libraryFragment_to_newPlaylistFragment"
+            app:destination="@id/newPlaylistFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_songsFragment"
+            app:destination="@id/songsFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newPlaylistFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.NewPlaylistFragment"
+        android:label="fragment_new_playlist"
+        tools:layout="@layout/fragment_new_playlist" >
+        <action
+            android:id="@+id/action_newPlaylistFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/songsFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment"
+        android:label="fragment_songs"
+        tools:layout="@layout/fragment_songs" >
+        <action
+            android:id="@+id/action_songsFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottomSheetDialogAddToPlaylistFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.BottomSheetDialogAddToPlaylistFragment"
+        android:label="BottomSheetDialogAddToPlaylistFragment" >
+        <action
+            android:id="@+id/action_bottomSheetDialogAddToPlaylistFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
 
 </navigation>

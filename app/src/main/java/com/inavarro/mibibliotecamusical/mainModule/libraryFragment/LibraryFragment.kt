@@ -136,7 +136,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         val fragmentManager = getFragmentManager()
         val fragmentTransaction = fragmentManager?.beginTransaction()
         if (fragmentTransaction != null) {
-            fragmentTransaction.add(R.id.hostFragment, fragment)
+            fragmentTransaction.add(R.id.navHostFragment, fragment)
             fragmentTransaction.commit()
 
             fragmentTransaction.addToBackStack(null)
@@ -202,7 +202,7 @@ class LibraryFragment : Fragment(), OnClickListener {
         val fragmentManager = getFragmentManager()
         val fragmentTransaction = fragmentManager?.beginTransaction()
         if (fragmentTransaction != null) {
-            fragmentTransaction.add(R.id.hostFragment, fragment)
+            fragmentTransaction.add(R.id.navHostFragment, fragment)
             fragmentTransaction.commit()
 
             fragmentTransaction.addToBackStack(null)
