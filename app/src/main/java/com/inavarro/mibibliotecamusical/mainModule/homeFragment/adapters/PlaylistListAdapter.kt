@@ -74,13 +74,6 @@ class PlaylistListAdapter(private val listener: OnClickListener):
                 titulo = "Canciones que te gustan"
             }
 
-            if (titulo.length > 11) {
-                titulo = titulo.substring(0, 11) + "..."
-                binding.tvPlaylistName.text = titulo
-            } else {
-                binding.tvPlaylistName.text = titulo
-            }
-
         }
     }
 

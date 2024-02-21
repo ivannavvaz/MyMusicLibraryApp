@@ -22,7 +22,6 @@ import com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.service.N
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -41,9 +40,9 @@ class NewPlaylistFragment : Fragment() {
 
         mActivity = activity as? MainActivity
 
-        mBinding.btnBack.setOnClickListener {
-            launchLibraryFragment()
-        }
+        //mBinding.btnBack.setOnClickListener {
+        //    launchLibraryFragment()
+        //}
 
         mBinding.btnSave.setOnClickListener {
             createPlaylist()

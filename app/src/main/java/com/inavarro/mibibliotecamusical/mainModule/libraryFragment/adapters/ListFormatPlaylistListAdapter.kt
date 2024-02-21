@@ -65,14 +65,25 @@ class ListFormatPlaylistListAdapter(private val listener: LibraryFragment):
                     .centerCrop()
                     .into(binding.imageView)
 
-                if (playlist.titulo.length > 50) {
-                    val titulo = playlist.titulo.substring(0, 50) + "..."
-                    binding.tvName.text = titulo
+                var titulo = playlist.titulo
+                var tipo = "Playlist • " + playlist.usuario.username
+
+                // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+                // If it is the favorite playlist, the title is "Canciones que te gustan"
+                if (titulo != "favorita_1") {
+                    titulo = titulo.replace("lista_", "")
+                    titulo = titulo.replace("_", " ")
+                    titulo = titulo[0].uppercase() + titulo.substring(1)
                 } else {
-                    binding.tvName.text = playlist.titulo
+                    titulo = "Canciones que te gustan"
+                    tipo = "Playlist • " + playlist.numeroCanciones + " canciones"
+
                 }
 
-                binding.tvType.text = playlist.usuario.username
+                binding.tvName.text = titulo
+                binding.tvType.text = tipo
+
+                // Add a dot between the type of the playlist and the username of the user who created it
 
             }
         }

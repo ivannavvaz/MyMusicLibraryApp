@@ -45,21 +45,9 @@ class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val playlist = getItem(position)
 
-        if (position == 0 || isEven(position)) {
-            // Add padding 16dp to left items
-
-            //val parentWidth = (R.layout.fragment_library as View).width
-            //val rvWidth = ( View.).width
-            //val margin = (parentWidth - rvWidth) / 2
-
-            val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
-            layoutParams.setMargins((16 * Resources.getSystem().displayMetrics.density).roundToInt(), 0, 0, 0)
-            holder.itemView.layoutParams = layoutParams
-        } else {
-            val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
-            layoutParams.setMargins(0, 0, 0, 0)
-            holder.itemView.layoutParams = layoutParams
-        }
+        val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
+        layoutParams.setMargins(0,  0, 0, (16 * Resources.getSystem().displayMetrics.density).roundToInt())
+        holder.itemView.layoutParams = layoutParams
 
         with(holder as ViewHolder) {
             setListener(playlist)
@@ -70,21 +58,26 @@ class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
                 .centerCrop()
                 .into(binding.ivPlaylist)
 
-            if (playlist.titulo.length > 11) {
-                val titulo = playlist.titulo.substring(0, 11) + "..."
-                binding.tvPlaylistName.text = titulo
-            } else {
-                binding.tvPlaylistName.text = playlist.titulo
-            }
-            binding.tvPlaylistUser.text = playlist.usuario.username
+            var titulo = playlist.titulo
+            var tipo = "Playlist • " + playlist.usuario.username
 
+            // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+            // If it is the favorite playlist, the title is "Canciones que te gustan"
+            if (titulo != "favorita_1") {
+                titulo = titulo.replace("lista_", "")
+                titulo = titulo.replace("_", " ")
+                titulo = titulo[0].uppercase() + titulo.substring(1)
+            } else {
+                titulo = "Canciones que te gustan"
+                tipo = "Playlist • " + playlist.numeroCanciones + " canciones"
+
+            }
+
+            binding.tvPlaylistName.text = titulo
+            binding.tvPlaylistUser.text = tipo
         }
     }
 
-    private fun isEven(pos: Int): Boolean {
-
-        return pos % 2 == 0
-    }
 
     class PlaylistDiffCallBack: DiffUtil.ItemCallback<Playlist>() {
         override fun areItemsTheSame(oldItem: Playlist, newItem: Playlist): Boolean {

@@ -6,29 +6,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".mainModule.libraryFragment.LibraryFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Biblioteca"
+            app:titleTextAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+            app:navigationIcon="@drawable/ic_arrow"
+            app:navigationIconTint="@color/white"
+
+            app:titleCentered="true"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/cbFormat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:button="@drawable/states_playlist_format"
-        android:buttonTint="@color/seed"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bNewPlaylist"
         app:layout_constraintTop_toTopOf="parent"
-        android:drawableTint="@color/seed"
-        app:buttonIconTint="@color/seed"
-        app:buttonIcon="@drawable/states_playlist_format"
-
+        app:layout_constraintBottom_toBottomOf="@id/appBarLayout"
+        app:buttonTint="@android:color/white"
         />
+
+    <CheckBox
+        android:id="@+id/bNewPlaylist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/appBarLayout"
+        app:layout_constraintBottom_toBottomOf="@id/appBarLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:button="@drawable/ic_add"
+        app:buttonTint="@android:color/white"
+        />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListFormat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/common_padding"
         tools:listitem="@layout/item_list"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbFormat"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:layout_constraintBottom_toBottomOf="parent"
         />
 
@@ -36,24 +68,16 @@
         android:id="@+id/rvGridFormat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/common_padding"
+        android:paddingTop="@dimen/common_padding"
+        android:paddingStart="13dp"
         tools:listitem="@layout/item_playlist"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cbFormat"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabNewPlaylist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_add"
-        app:maxImageSize="60dp"
-        android:backgroundTint="@color/seed"
-        android:layout_margin="8dp"
+        tools:ignore="RtlSymmetry" />
 
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
