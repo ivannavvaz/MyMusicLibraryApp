@@ -57,13 +57,9 @@ class PlaylistListAdapter(private val listener: OnClickListener):
         with(holder as ViewHolder) {
             setListener(playlist)
 
-            Glide.with(context)
-                .load(Constants.DEFAULT_PLAYLIST_IMAGE)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .centerCrop()
-                .into(binding.imageView)
-
             var titulo = playlist.titulo
+            var tipo = "Playlist • " + playlist.usuario.username
+            var image = Constants.DEFAULT_PLAYLIST_IMAGE
 
             // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
             // If it is the favorite playlist, the title is "Canciones que te gustan"
@@ -71,12 +67,21 @@ class PlaylistListAdapter(private val listener: OnClickListener):
                 titulo = titulo.replace("lista_", "")
                 titulo = titulo.replace("_", " ")
                 titulo = titulo[0].uppercase() + titulo.substring(1)
+
             } else {
                 titulo = "Canciones que te gustan"
+                tipo = "Playlist • " + playlist.numeroCanciones + " canciones"
+                image = Constants.FAVORITE_PLAYLIST_IMAGE
             }
 
+            Glide.with(context)
+                .load(image)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .centerCrop()
+                .into(binding.imageView)
+
             binding.tvName.text = titulo
-            binding.tvType.text = "Playlist"
+            binding.tvType.text = tipo
         }
     }
 

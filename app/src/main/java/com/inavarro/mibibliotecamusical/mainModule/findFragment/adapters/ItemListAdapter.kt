@@ -123,22 +123,26 @@ class ItemListAdapter(private val listener: FindFragment):
 
             var titulo = playlist.titulo
             var tipo = "Playlist • " + playlist.usuario.username
+            var image = Constants.DEFAULT_PLAYLIST_IMAGE
 
+            // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+            // If it is the favorite playlist, the title is "Canciones que te gustan"
             if (titulo != "favorita_1") {
                 titulo = titulo.replace("lista_", "")
                 titulo = titulo.replace("_", " ")
                 titulo = titulo[0].uppercase() + titulo.substring(1)
             } else {
+                image = Constants.FAVORITE_PLAYLIST_IMAGE
                 titulo = "Canciones que te gustan"
                 tipo = "Playlist • " + playlist.numeroCanciones + " canciones"
+
             }
 
-            tvName.text = titulo
-            tvType.text = tipo
+            mBinding.tvName.text = titulo
+            mBinding.tvType.text = tipo
 
+            setImage(image, mBinding, Constants.DEFAULT_PLAYLIST_IMAGE)
         }
-
-        setImage("", mBinding, Constants.DEFAULT_PLAYLIST_IMAGE)
     }
 
     private fun setImage(imageRoute: String, mBinding: ItemListBinding, fallbackImage: String) {

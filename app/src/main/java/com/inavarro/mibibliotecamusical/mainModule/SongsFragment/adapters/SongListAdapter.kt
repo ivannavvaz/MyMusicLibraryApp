@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
@@ -56,19 +58,17 @@ class SongListAdapter(private val listener: OnClickListener):
             with(holder as ViewHolder) {
                 setListener(song)
 
-                Glide.with(context)
-                    .load(Constants.DEFAULT_PLAYLIST_IMAGE)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .centerCrop()
-                    .into(binding.imageView)
+                val storageRef = Firebase.storage.reference
 
-                if (song.titulo.length > 50) {
-                    val titulo = song.titulo.substring(0, 50) + "..."
-                    binding.tvName.text = titulo
-                } else {
-                    binding.tvName.text = song.titulo
+                storageRef.child(song.album.imagen).downloadUrl.addOnSuccessListener {
+                    Glide.with(context)
+                        .load(it)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .centerCrop()
+                        .into(binding.imageView)
                 }
 
+                binding.tvName.text = song.titulo
                 binding.tvType.text = song.album.artista.nombre
 
             }

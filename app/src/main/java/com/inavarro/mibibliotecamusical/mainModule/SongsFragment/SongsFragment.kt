@@ -1,5 +1,6 @@
 package com.inavarro.mibibliotecamusical.mainModule.SongsFragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
@@ -50,7 +53,7 @@ class SongsFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id))
+        val idPlaylist = arguments?.getLong("idSong")
 
         setupRecyclerView()
 
@@ -88,8 +91,30 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 val playlist = result.body()!!
 
-                mBinding.tvPlaylist.text = playlist.titulo
+                var titulo = playlist.titulo
+                var image = Constants.DEFAULT_PLAYLIST_IMAGE
+
+                // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+                // If it is the favorite playlist, the title is "Canciones que te gustan"
+                if (titulo != "favorita_1") {
+                    titulo = titulo.replace("lista_", "")
+                    titulo = titulo.replace("_", " ")
+                    titulo = titulo[0].uppercase() + titulo.substring(1)
+                } else {
+                    image = Constants.FAVORITE_PLAYLIST_IMAGE
+                    titulo = "Canciones que te gustan"
+                }
+
+                mBinding.tvPlaylist.text = titulo
                 mBinding.tvUser.text = playlist.usuario.username
+
+                context?.let {
+                    Glide.with(it)
+                        .load(image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .centerCrop()
+                        .into(mBinding.ivPlaylistSf)
+                }
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())
@@ -97,6 +122,7 @@ class SongsFragment : Fragment(), OnClickListener {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getSongs(id: Long){
         val retrofit = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
@@ -114,7 +140,7 @@ class SongsFragment : Fragment(), OnClickListener {
                 val songs = result.body()!!
 
                 mSongListAdapter.submitList(songs)
-                mBinding.tvCanciones.text = songs.size.toString() + " canciones"
+                mBinding.tvCanciones.text = "${songs.size} canciones"
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())

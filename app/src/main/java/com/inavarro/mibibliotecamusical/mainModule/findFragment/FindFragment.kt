@@ -75,7 +75,6 @@ class FindFragment : Fragment(), OnClickListener {
     override fun onClick(songEntity: Song) {
         val bundle = Bundle()
         bundle.putLong("songIdSelected", songEntity.id)
-
         (activity as? MainActivity)?.showBottomSheetDialog(bundle)
     }
 

@@ -59,13 +59,11 @@ class BottomSheetDialogAddToPlaylistFragment : Fragment(), OnClickListener {
         getPlaylistUser()
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (arguments != null) {
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (!hidden) {
             idSongSelected = arguments?.getLong(getString(R.string.arg_songSelected_id), 0)!!
-            Log.d("BottomSheetDialog", "onViewCreated: $idSongSelected")
         }
-
     }
 
     private fun setupRecyclerViews() {
@@ -92,7 +90,7 @@ class BottomSheetDialogAddToPlaylistFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
-                val result = service.getPlaylistUser(UserApplication.user.id) // Aquí debería ir el id del usuario
+                val result = service.getPlaylistUser(UserApplication.user.id)
 
                 val playlists = result.body()!!
 
@@ -137,13 +135,4 @@ class BottomSheetDialogAddToPlaylistFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        val navBar = requireActivity().findViewById<BottomNavigationView>(com.inavarro.mibibliotecamusical.R.id.bottomNav)
-        navBar.visibility = View.VISIBLE
-
-        requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
-            .commitAllowingStateLoss()
-    }
 }
