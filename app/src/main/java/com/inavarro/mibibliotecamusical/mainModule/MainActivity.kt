@@ -6,9 +6,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.databinding.ActivityMainBinding
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
@@ -27,16 +26,11 @@ class MainActivity : AppCompatActivity() {
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        setupBottomNav()
+        //setupBottomNav()
 
-        //val navController = findNavController(R.id.hostFragment)
-        //val appBarConfiguration = AppBarConfiguration(navController.graph)
-        //setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.navHostFragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        val hostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
+        val navController = hostFragment.navController
+        mBinding.bottomNav.setupWithNavController(navController)
     }
 
     private fun setupBottomNav() {
@@ -67,17 +61,17 @@ class MainActivity : AppCompatActivity() {
 
         mBinding.bottomNav.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.action_home -> {
+                R.id.homeFragment -> {
                     mFragmentManager.beginTransaction().hide(mActiveFragment).show(homeFragment).commit()
                     mActiveFragment = homeFragment
                     true
                 }
-                R.id.action_add -> {
+                R.id.findFragment -> {
                     mFragmentManager.beginTransaction().hide(mActiveFragment).show(findFragment).commit()
                     mActiveFragment = findFragment
                     true
                 }
-                R.id.action_profile -> {
+                R.id.libraryFragment -> {
                     mFragmentManager.beginTransaction().hide(mActiveFragment).show(libraryFragment).commit()
                     mActiveFragment = libraryFragment
                     true

@@ -31,10 +31,10 @@
         android:backgroundTint="@color/md_theme_dark_background"
         android:backgroundTintMode="src_atop"
         app:defaultNavHost="true"
-        navGraph="@navigation/nav_graph"
+        app:navGraph="@navigation/main_nav"
         />
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/flBottomSetDialog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
