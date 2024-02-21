@@ -6,17 +6,21 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.R
+import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
+import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentSongsBinding
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.adapters.SongListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.service.SongsService
+import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.service.LibraryService
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,6 +32,8 @@ class SongsFragment : Fragment(), OnClickListener {
     private lateinit var mSongListAdapter: SongListAdapter
 
     private lateinit var mLinearlayout: LinearLayoutManager
+
+    private var idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id))
 
 
 
@@ -50,13 +56,11 @@ class SongsFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idPlaylist = arguments?.getLong(getString(R.string.arg_playlist_id))
-
         setupRecyclerView()
 
         if (idPlaylist != null) {
-            getPlaylist(idPlaylist)
-            getSongs(idPlaylist)
+            getPlaylist(idPlaylist!!)
+            getSongs(idPlaylist!!)
         }
     }
 
@@ -145,7 +149,29 @@ class SongsFragment : Fragment(), OnClickListener {
         alertDialog.show()
     }
 
-    private fun deleteSong(id: Long){
+    private fun deleteSong(idSong: Long){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
+        val service = retrofit.create(SongsService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+
+                val result = service.deleteSongPlaylist(UserApplication.user.id, idPlaylist!!, idSong)
+
+                Log.i("DELETE RESULT", result.toString())
+
+                Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
+
+                getSongs(idPlaylist!!)
+
+            } catch (e: Exception) {
+                Log.e("DELETE PLAYLIST ERROR", e.message.toString())
+            }
+        }
     }
 }
