@@ -18,6 +18,8 @@ object Constants {
     const val SONGS_PATH = "/canciones"
     const val SINGIN_PATH = "/usuarios"
     const val VALIDATE_PATH = "/usuario/validar"
+    const val SONG_PATH = "/cancion"
+
 
     // RESULTADOS
     const val EMAIL_PARAM = "email"
@@ -27,6 +29,8 @@ object Constants {
     const val PAIS_PARAM = "pais"
     const val CODIGO_POSTAL_PARAM = "codigoPostal"
     const val FECHA_NACIMIENTO_PARAM = "fechaNacimiento"
+    const val TITULO_PARAM = "titulo"
+
 
     // DEFAULTS IMAGES
     const val DEFAULT_ALBUM_IMAGE = "https://pngimg.com/uploads/vinyl/vinyl_PNG92.png"

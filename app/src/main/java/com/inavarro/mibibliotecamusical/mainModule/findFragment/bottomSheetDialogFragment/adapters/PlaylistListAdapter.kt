@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters
+package com.inavarro.mibibliotecamusical.mainModule.findFragment.bottomSheetDialogFragment.adapters
 
 import android.content.Context
 import android.content.res.Resources
@@ -13,23 +13,21 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
+import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
 import com.inavarro.mibibliotecamusical.databinding.ItemPlaylistBinding
-import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.LibraryFragment
 import kotlin.math.roundToInt
 
-class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
+class PlaylistListAdapter(private val listener: OnClickListener):
     ListAdapter<Playlist, RecyclerView.ViewHolder>(PlaylistDiffCallBack()) {
 
     private lateinit var context: Context
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val binding = ItemPlaylistBinding.bind(view)
+        val binding = ItemListBinding.bind(view)
 
         fun setListener(playlistEntity: Playlist) {
             with(binding.root) {
                 setOnClickListener { listener.onClick(playlistEntity) }
-                setOnLongClickListener { listener.onLongClick(playlistEntity)
-                    true }
             }
         }
     }
@@ -37,7 +35,7 @@ class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
 
-        val view = LayoutInflater.from(context).inflate(R.layout.item_playlist, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_list, parent, false)
 
         return ViewHolder(view)
     }
@@ -45,15 +43,10 @@ class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val playlist = getItem(position)
 
-        if (position == 0 || isEven(position)) {
-            // Add padding 16dp to left items
-
-            //val parentWidth = (R.layout.fragment_library as View).width
-            //val rvWidth = ( View.).width
-            //val margin = (parentWidth - rvWidth) / 2
-
+        if (position == 0) {
+            // Add padding 16dp to the first item
             val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
-            layoutParams.setMargins((16 * Resources.getSystem().displayMetrics.density).roundToInt(), 0, 0, 0)
+            layoutParams.setMargins(0, (16 * Resources.getSystem().displayMetrics.density).roundToInt(), 0, 0)
             holder.itemView.layoutParams = layoutParams
         } else {
             val layoutParams = holder.itemView.layoutParams as RecyclerView.LayoutParams
@@ -68,22 +61,23 @@ class GridFormatPlaylistListAdapter(private val listener: LibraryFragment):
                 .load(Constants.DEFAULT_PLAYLIST_IMAGE)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
-                .into(binding.ivPlaylist)
+                .into(binding.imageView)
 
-            if (playlist.titulo.length > 11) {
-                val titulo = playlist.titulo.substring(0, 11) + "..."
-                binding.tvPlaylistName.text = titulo
+            var titulo = playlist.titulo
+
+            // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+            // If it is the favorite playlist, the title is "Canciones que te gustan"
+            if (titulo != "favorita_1") {
+                titulo = titulo.replace("lista_", "")
+                titulo = titulo.replace("_", " ")
+                titulo = titulo[0].uppercase() + titulo.substring(1)
             } else {
-                binding.tvPlaylistName.text = playlist.titulo
+                titulo = "Canciones que te gustan"
             }
-            binding.tvPlaylistUser.text = playlist.usuario.username
 
+            binding.tvName.text = titulo
+            binding.tvType.text = "Playlist"
         }
-    }
-
-    private fun isEven(pos: Int): Boolean {
-
-        return pos % 2 == 0
     }
 
     class PlaylistDiffCallBack: DiffUtil.ItemCallback<Playlist>() {

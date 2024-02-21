@@ -18,6 +18,8 @@
     <string name="imagen_de_usuario">Imagen de usuario</string>
     <string name="arg_playlist_id">playlistId</string>
     <string name="none" />
+    <string name="arg_song_id">songId</string>
+    <string name="eliminar">¿Eliminar playlist?</string>
     <string name="image">Image</string>
     <string name="canciones_que_te_gustan">Canciones que te gustan</string>
     <string name="iniciar_sesion_con_twitter">Iniciar sesion con Twitter</string>

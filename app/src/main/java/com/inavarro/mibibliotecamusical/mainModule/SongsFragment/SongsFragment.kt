@@ -1,5 +1,6 @@
 package com.inavarro.mibibliotecamusical.mainModule.SongsFragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -124,9 +125,6 @@ class SongsFragment : Fragment(), OnClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-
-
-
         requireFragmentManager().beginTransaction().remove((this as Fragment?)!!)
             .commitAllowingStateLoss()
     }
@@ -134,5 +132,31 @@ class SongsFragment : Fragment(), OnClickListener {
         TODO("Not yet implemented")
     }
 
+    override fun onLongClick(songEntity: Song) {
+        val builder = AlertDialog.Builder(requireContext())
+        //val inflater = requireActivity().layoutInflater
 
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog, null)
+
+        //Log.println(Log.ASSERT, "LONG CLICK", "AAAAAAAAAAAAA")
+
+
+        builder.setView(dialogView)
+
+            .setPositiveButton("Eliminar"){ dialog, which ->
+                deleteSong(songEntity.id)
+
+            }
+            .setNegativeButton("Cancelar"){ dialog, which ->
+
+            }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun deleteSong(id: Long){
+
+    }
 }
