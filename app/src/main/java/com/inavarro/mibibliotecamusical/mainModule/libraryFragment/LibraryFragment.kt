@@ -14,22 +14,15 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
-import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentLibraryBinding
-import com.inavarro.mibibliotecamusical.mainModule.MainActivity
-import com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.NewPlaylistFragment
-import com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters.GridFormatPlaylistListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters.ListFormatPlaylistListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.libraryFragment.service.LibraryService
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

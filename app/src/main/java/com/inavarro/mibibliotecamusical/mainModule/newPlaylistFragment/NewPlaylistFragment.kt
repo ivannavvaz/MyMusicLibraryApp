@@ -1,4 +1,4 @@
-package com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment
+package com.inavarro.mibibliotecamusical.mainModule.newPlaylistFragment
 
 import android.app.Activity
 import android.content.Context
@@ -20,7 +20,7 @@ import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.playlist.PlaylistInfo
 import com.inavarro.mibibliotecamusical.databinding.FragmentNewPlaylistBinding
 import com.inavarro.mibibliotecamusical.mainModule.MainActivity
-import com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.service.NewPlaylistService
+import com.inavarro.mibibliotecamusical.mainModule.newPlaylistFragment.service.NewPlaylistService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

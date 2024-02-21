@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/newPlaylistFragment"
-        android:name="com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.NewPlaylistFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.newPlaylistFragment.NewPlaylistFragment"
         android:label="fragment_new_playlist"
         tools:layout="@layout/fragment_new_playlist" >
         <action
@@ -68,7 +68,7 @@
 
     <fragment
         android:id="@+id/songsFragment"
-        android:name="com.inavarro.mibibliotecamusical.mainModule.SongsFragment.SongsFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.songsFragment.SongsFragment"
         android:label="fragment_songs"
         tools:layout="@layout/fragment_songs" >
         <action

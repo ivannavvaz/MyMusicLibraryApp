@@ -1,11 +1,8 @@
-package com.inavarro.mibibliotecamusical.mainModule.NewPlaylistFragment.service
+package com.inavarro.mibibliotecamusical.mainModule.newPlaylistFragment.service
 
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Playlist
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.playlist.PlaylistInfo
-import okhttp3.RequestBody
-import org.json.JSONObject
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Headers
