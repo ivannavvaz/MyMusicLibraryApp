@@ -86,11 +86,13 @@ class FindFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(podcast: Podcast) {
-        TODO("Not yet implemented")
+        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(podcast.id)
+        findNavController().navigate(action)
     }
 
     override fun onClick(album: Album) {
-        TODO("Not yet implemented")
+        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(album.id)
+        findNavController().navigate(action)
     }
 
 
