@@ -109,7 +109,7 @@ class firstElementsListAdapter(private val listener: HomeFragment):
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .centerCrop()
             .into(mBinding.imageView)
-        
+
     }
 
     private fun setImage(imageRoute: String, mBinding: ItemFirstElementBinding, fallbackImage: String) {

@@ -44,9 +44,7 @@ class SongsFragment : Fragment(), OnClickListener {
         mBinding = FragmentSongsBinding.inflate(inflater, container, false)
 
         mBinding.cbBack.setOnClickListener {
-            findNavController().navigate(
-                SongsFragmentDirections.actionSongsFragmentToLibraryFragment()
-            )
+            findNavController().popBackStack()
         }
 
         idPlaylist = arguments?.getLong("idSong")
