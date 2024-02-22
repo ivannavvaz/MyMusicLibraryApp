@@ -1,22 +1,23 @@
 package com.inavarro.mibibliotecamusical.authModule.loginFragment
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.authModule.loginFragment.services.LoginService
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoEmail
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfoUsername
-import com.inavarro.mibibliotecamusical.databinding.ActivityAuthBinding
 import com.inavarro.mibibliotecamusical.databinding.FragmentLoginBinding
 import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LoginFragment : Fragment() {
 
     private lateinit var mBinding: FragmentLoginBinding
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +49,20 @@ class LoginFragment : Fragment() {
             login()
         }
 
+        sharedPreferences = requireActivity().getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
+
+        if (sharedPreferences.getBoolean("session", true)) {
+            val user = sharedPreferences.getString("username", "")
+            val password = sharedPreferences.getString("password", "")
+            mBinding.etUser.setText(user)
+            mBinding.etPassword.setText(password)
+            mBinding.swKeepSession.isChecked = true
+        }
+
         return mBinding.root
     }
 
+    @SuppressLint("CommitPrefEdits")
     private fun login() {
         val user = mBinding.etUser.text.toString().trim()
         val password = mBinding.etPassword.text.toString().trim()
@@ -90,6 +103,19 @@ class LoginFragment : Fragment() {
 
                 val intent = Intent(requireContext(), MainActivity::class.java)
                 startActivity(intent)
+
+                val editor = sharedPreferences.edit()
+                if (mBinding.swKeepSession.isChecked) {
+                    editor.putBoolean("session", true)
+                    editor.putString("username", user)
+                    editor.putString("password", password)
+                } else {
+                    editor.putBoolean("session", false)
+                    editor.putString("username", "")
+                    editor.putString("password", "")
+                }
+
+                editor.apply()
 
             } catch (e: Exception) {
                 Log.e("Error", e.toString())
