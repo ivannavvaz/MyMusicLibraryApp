@@ -51,6 +51,8 @@ class EpisodesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mBinding.pbLoading.visibility = View.VISIBLE
+
         setupRecyclerView()
 
         if (idPodcast != null) {
@@ -150,6 +152,8 @@ class EpisodesFragment : Fragment() {
 
                 mEpisodesListAdapter.submitList(episodes)
                 mBinding.tvCanciones.text = "${episodes.size} capítulos"
+
+                mBinding.pbLoading.visibility = View.GONE
 
             } catch (e: Exception) {
                 Log.e("SET PODCAST ERROR", e.message.toString())

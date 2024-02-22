@@ -55,6 +55,8 @@ class FindFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mBinding.progressBarFindFragment.visibility = View.VISIBLE
+
         items.clear()
         setupRecyclerViews()
         setupSearchView()
@@ -118,6 +120,8 @@ class FindFragment : Fragment(), OnClickListener {
 
                 items.sortBy { it.toString() }
                 mListAdapter.submitList(items)
+
+                mBinding.progressBarFindFragment.visibility = View.GONE
 
             } catch (e: Exception) {
                 Log.e("FIND FRAGMENT GET ITEMS ERROR", e.message.toString())

@@ -70,6 +70,8 @@ class LibraryFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        mBinding.progressBarLibraryFragment.visibility = VISIBLE
+
         mBinding.rvGridFormat.visibility = GONE
         setupRecyclerView()
         getPlaylists()
@@ -115,6 +117,8 @@ class LibraryFragment : Fragment(), OnClickListener {
 
                 mListFormatPlaylistListAdapter.submitList(playlists)
                 mGridFormatGridFormatPlaylistListAdapter.submitList(playlists)
+
+                mBinding.progressBarLibraryFragment.visibility = GONE
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())

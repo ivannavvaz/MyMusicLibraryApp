@@ -74,6 +74,8 @@ class HomeFragment : Fragment(), OnClickListener {
             getFirstElements()
         }
 
+        mBinding.progressBarHomeFragment.visibility = View.VISIBLE
+
         getPlaylist()
         getPodcasts()
         getAlbums()
@@ -243,6 +245,8 @@ class HomeFragment : Fragment(), OnClickListener {
 
                 val albums = result.body()!!
                 mAlbumsAdapter.submitList(albums)
+
+                mBinding.progressBarHomeFragment.visibility = View.GONE
 
             } catch (e: Exception) {
                 Log.e("SET ALBUM ERROR", e.message.toString())

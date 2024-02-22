@@ -61,6 +61,8 @@ class SongsFragment : Fragment(), OnClickListener {
 
         setupRecyclerView()
 
+        mBinding.pbLoading.visibility = View.VISIBLE
+
         if (isAlbum == true) {
             mBinding.toolbar.setTitle(R.string.album)
             getAlbum(idEntity!!)
@@ -177,9 +179,7 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 mBinding.tvUser.text = album.artista.nombre
 
-                Log.e("ALBUM IMAGE", image)
-                Log.e("ALBUM TITULO", titulo)
-                Log.e("ALBUM USUARIO", album.usuario.username)
+                mBinding.pbLoading.visibility = View.GONE
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())
@@ -211,6 +211,8 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 mSongListAdapter.submitList(songs)
                 mBinding.tvCanciones.text = "${songs.size} canciones"
+
+                mBinding.pbLoading.visibility = View.GONE
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())
