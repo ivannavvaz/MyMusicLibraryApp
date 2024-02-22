@@ -14,11 +14,13 @@ object Constants {
     const val PLAYLISTS_PATH = "/playlists"
     const val PLAYLIST_PATH = "/playlist"
     const val PODCASTS_PATH = "/podcasts"
+    const val PODCAST_PATH = "/podcast"
     const val ALBUMS_PATH = "/albums"
     const val SONGS_PATH = "/canciones"
     const val SINGIN_PATH = "/usuarios"
     const val VALIDATE_PATH = "/usuario/validar"
     const val SONG_PATH = "/cancion"
+    const val CAPITULOS_PATH = "/capitulos"
 
 
     // RESULTADOS
