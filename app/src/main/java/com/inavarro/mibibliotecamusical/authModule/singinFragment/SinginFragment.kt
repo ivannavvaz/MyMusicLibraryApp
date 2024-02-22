@@ -212,26 +212,25 @@ class SinginFragment : Fragment() {
                 val validateResponse = service.validateUser(UserInfo(email, user))
 
                 if (validateResponse.isSuccessful) {
-                    Toast.makeText(context, "El usuario ya existe", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
+                    if (validateResponse.body()?.response == "Unauthorized") {
+                        Toast.makeText(context, "El email ya existe", Toast.LENGTH_SHORT).show()
+                        return@launch
+                    } else if (validateResponse.body()?.response == "Authorized") {
+                        val response = service.singinUser(usuario)
 
-                if (validateResponse.code() == 401) {
-
-                    val response = service.singinUser(usuario)
-
-                    if (response.isSuccessful) {
-                        val finalUser = response.body()
-                        Toast.makeText(context, "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(
-                            SinginFragmentDirections.actionSinginFragmentToLoginFragment()
-                        )
-                    } else {
-                        Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show()
-                        Log.e("USER", response.errorBody().toString())
+                        if (response.isSuccessful) {
+                            val finalUser = response.body()
+                            Toast.makeText(context, "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
+                            findNavController().navigate(
+                                SinginFragmentDirections.actionSinginFragmentToLoginFragment()
+                            )
+                        } else {
+                            Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show()
+                            Log.e("USER", response.errorBody().toString())
+                        }
                     }
-
                 }
+
 
             } catch (e: Exception) {
                 Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show()
