@@ -3,6 +3,7 @@ package com.inavarro.mibibliotecamusical.mainModule.homeFragment.services
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.inavarro.mibibliotecamusical.authModule.singinFragment.Entities.Country
+import com.inavarro.mibibliotecamusical.authModule.singinFragment.Entities.ResponseValidate
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.User
 import com.inavarro.mibibliotecamusical.common.retrofit.dataclassRequest.user.UserInfo
@@ -27,6 +28,6 @@ interface SinginService {
 
     @Headers("Content-Type: application/json")
     @POST(Constants.BASE_URL + Constants.VALIDATE_PATH)
-    fun validateUser(@Body data: UserInfo): Response<JsonElement>
+    fun validateUser(@Body data: UserInfo): Response<ResponseValidate>
 
 }
