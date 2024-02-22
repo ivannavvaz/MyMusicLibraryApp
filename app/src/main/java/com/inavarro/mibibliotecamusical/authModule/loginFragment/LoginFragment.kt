@@ -40,9 +40,7 @@ class LoginFragment : Fragment() {
         mBinding = FragmentLoginBinding.inflate(layoutInflater)
 
         mBinding.cbBack.setOnClickListener {
-            findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToAuthFragment()
-            )
+            findNavController().popBackStack()
         }
 
         mBinding.btnLogin.setOnClickListener {
