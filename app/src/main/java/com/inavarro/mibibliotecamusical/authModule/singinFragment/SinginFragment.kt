@@ -221,7 +221,7 @@ class SinginFragment : Fragment() {
                 } else {
                     Toast.makeText(context, "Error al crear, el usuario o correo ya existen", Toast.LENGTH_SHORT).show()
                 }
-                
+
             } catch (e: Exception) {
                 Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show()
                 Log.e("USER", e.stackTraceToString())
