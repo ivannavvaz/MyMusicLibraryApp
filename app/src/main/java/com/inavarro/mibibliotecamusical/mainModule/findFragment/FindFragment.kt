@@ -80,7 +80,7 @@ class FindFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(playlist: Playlist) {
-        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(playlist.id)
+        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(false, playlist.id)
         findNavController().navigate(action)
     }
 
@@ -90,7 +90,7 @@ class FindFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(album: Album) {
-        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(album.id)
+        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(true, album.id)
         findNavController().navigate(action)
     }
 

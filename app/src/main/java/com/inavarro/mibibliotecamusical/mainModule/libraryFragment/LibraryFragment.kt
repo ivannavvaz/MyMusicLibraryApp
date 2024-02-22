@@ -124,7 +124,7 @@ class LibraryFragment : Fragment(), OnClickListener {
 
     override fun onClick(playlistEntity: Playlist) {
         findNavController().navigate(
-            LibraryFragmentDirections.actionLibraryFragmentToSongsFragment(playlistEntity.id)
+            LibraryFragmentDirections.actionLibraryFragmentToSongsFragment(false, playlistEntity.id)
         )
     }
 

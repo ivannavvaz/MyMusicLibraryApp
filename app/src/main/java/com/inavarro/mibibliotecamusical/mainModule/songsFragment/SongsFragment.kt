@@ -34,7 +34,8 @@ class SongsFragment : Fragment(), OnClickListener {
 
     private lateinit var mLinearlayout: LinearLayoutManager
 
-    private var idPlaylist = arguments?.getLong("idSong")
+    private var idEntity= arguments?.getLong("idSong")
+    private var isAlbum = arguments?.getBoolean("isAlbum")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +48,8 @@ class SongsFragment : Fragment(), OnClickListener {
             findNavController().popBackStack()
         }
 
-        idPlaylist = arguments?.getLong("idSong")
-        Log.i("ID PLAYLIST", idPlaylist.toString())
+        isAlbum = arguments?.getBoolean("isAlbum")
+        idEntity = arguments?.getLong("idSong")
 
         return mBinding.root
     }
@@ -58,9 +59,12 @@ class SongsFragment : Fragment(), OnClickListener {
 
         setupRecyclerView()
 
-        if (idPlaylist != null) {
-            getPlaylist(idPlaylist!!)
-            getSongs(idPlaylist!!)
+        if (isAlbum == true) {
+            getAlbum(idEntity!!)
+            getSongs(idEntity!!)
+        } else {
+            getPlaylist(idEntity!!)
+            getSongs(idEntity!!)
         }
     }
 
@@ -128,6 +132,42 @@ class SongsFragment : Fragment(), OnClickListener {
         }
     }
 
+    private fun getAlbum(id: Long){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(SongsService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+
+                val result = service.getAlbum(id)
+
+                val album = result.body()!!
+
+                var titulo = album.titulo
+                var image = Constants.DEFAULT_PLAYLIST_IMAGE
+
+                mBinding.tvPlaylist.text = titulo
+                mBinding.tvUser.text = album.usuario.username
+
+                context?.let {
+                    Glide.with(it)
+                        .load(image)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .centerCrop()
+                        .into(mBinding.ivPlaylistSf)
+                }
+
+            } catch (e: Exception) {
+                Log.e("SET PLAYLIST ERROR", e.message.toString())
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun getSongs(id: Long){
         val retrofit = Retrofit.Builder()
@@ -140,8 +180,13 @@ class SongsFragment : Fragment(), OnClickListener {
         lifecycleScope.launch {
 
             try {
+                val result: retrofit2.Response<MutableList<Song>>
 
-                val result = service.getSongs(id) //Aquí va id
+                if (isAlbum == true) {
+                    result = service.getSongsAlbum(id) //Aquí va id
+                } else {
+                    result = service.getSongsPlaylist(id) //Aquí va id
+                }
 
                 val songs = result.body()!!
 
@@ -155,22 +200,24 @@ class SongsFragment : Fragment(), OnClickListener {
     }
 
     override fun onLongClick(songEntity: Song) {
-        val builder = AlertDialog.Builder(requireContext())
+        if (isAlbum == false) {
+            val builder = AlertDialog.Builder(requireContext())
 
-        val dialogView = layoutInflater.inflate(R.layout.dialog, null)
+            val dialogView = layoutInflater.inflate(R.layout.dialog, null)
 
-        builder.setView(dialogView)
+            builder.setView(dialogView)
 
-            .setPositiveButton("Eliminar"){ _, _ ->
-                deleteSong(songEntity.id)
+                .setPositiveButton("Eliminar") { _, _ ->
+                    deleteSong(songEntity.id)
 
-            }
-            .setNegativeButton("Cancelar"){ _, _ ->
+                }
+                .setNegativeButton("Cancelar") { _, _ ->
 
-            }
+                }
 
-        val alertDialog = builder.create()
-        alertDialog.show()
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
     }
 
     private fun deleteSong(idSong: Long){
@@ -186,13 +233,13 @@ class SongsFragment : Fragment(), OnClickListener {
             try {
 
                 val result =
-                    service.deleteSongPlaylist(UserApplication.user.id, idPlaylist!!, idSong)
+                    service.deleteSongPlaylist(UserApplication.user.id, idEntity!!, idSong)
 
                 Log.i("DELETE RESULT", result.toString())
 
                 Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
 
-                getSongs(idPlaylist!!)
+                getSongs(idEntity!!)
 
             } catch (e: Exception) {
                 Log.e("DELETE PLAYLIST ERROR", e.message.toString())

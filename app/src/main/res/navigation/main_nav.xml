@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_songsFragment_to_findFragment"
             app:destination="@id/findFragment" />
+        <argument
+            android:name="album"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/episodesFragment"

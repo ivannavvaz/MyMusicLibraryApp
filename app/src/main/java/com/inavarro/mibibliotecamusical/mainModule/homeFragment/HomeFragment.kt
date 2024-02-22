@@ -166,12 +166,12 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(albumEntity: Album) {
-        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(albumEntity.id)
+        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(true, albumEntity.id)
         findNavController().navigate(action)
     }
 
     override fun onClick(playlistEntity: Playlist) {
-        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(playlistEntity.id)
+        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(false, playlistEntity.id)
         findNavController().navigate(action)
     }
 
