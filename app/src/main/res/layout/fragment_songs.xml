@@ -42,11 +42,10 @@
 
     <ImageView
         android:id="@+id/ivPlaylistSf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/portada_image_size"
+        android:layout_height="@dimen/portada_image_size"
         app:layout_constraintTop_toBottomOf="@id/cbBack"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/ic_launcher_background"
         android:layout_margin="@dimen/common_margin"
         android:contentDescription="@string/imagen" />
 
