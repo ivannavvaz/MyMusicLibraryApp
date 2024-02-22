@@ -154,10 +154,6 @@ class SongsFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onClick(songEntity: Song) {
-        TODO("Not yet implemented")
-    }
-
     override fun onLongClick(songEntity: Song) {
         val builder = AlertDialog.Builder(requireContext())
 
