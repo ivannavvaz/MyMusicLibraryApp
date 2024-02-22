@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
+import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.FragmentSongsBinding
@@ -32,7 +34,7 @@ class SongsFragment : Fragment(), OnClickListener {
 
     private lateinit var mLinearlayout: LinearLayoutManager
 
-
+    private val idPlaylist = arguments?.getLong("idSong")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +55,7 @@ class SongsFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idPlaylist = arguments?.getLong("idSong")
+
 
         setupRecyclerView()
 
@@ -171,7 +173,30 @@ class SongsFragment : Fragment(), OnClickListener {
         alertDialog.show()
     }
 
-    private fun deleteSong(id: Long){
+    private fun deleteSong(idSong: Long){
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
+        val service = retrofit.create(SongsService::class.java)
+
+        lifecycleScope.launch {
+
+            try {
+
+                val result =
+                    service.deleteSongPlaylist(UserApplication.user.id, idPlaylist!!, idSong)
+
+                Log.i("DELETE RESULT", result.toString())
+
+                Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
+
+                getSongs(idPlaylist!!)
+
+            } catch (e: Exception) {
+                Log.e("DELETE PLAYLIST ERROR", e.message.toString())
+            }
+        }
     }
 }
