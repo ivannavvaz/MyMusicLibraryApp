@@ -15,9 +15,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/common_margin"
         android:text="@string/eliminar"
-        android:textSize="30sp"
+        android:textSize="@dimen/common_max_text_size"
         android:textColor="@color/seed"
         android:textStyle="bold"/>
 

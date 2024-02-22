@@ -5,7 +5,7 @@
     <string name="home_title">Home</string>
     <string name="search_title">Search</string>
     <string name="library_title">Library</string>
-    <string name="menu_add">Nueva playlist</string>
+    <string name="nueva_playlist">Nueva playlist</string>
     <string name="imagen_del_album">Imagen del album</string>
     <string name="nombre_del_album">Nombre del album</string>
     <string name="nombre_del_artista">Nombre del artista</string>
@@ -49,4 +49,16 @@
     <string name="selecctor_de_imagen">Selecctor de imagen</string>
     <string name="t_tulo">Título</string>
     <string name="arg_songSelected_id">songIdSelected</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="titulo">Título</string>
+    <string name="default_canciones">123 canciones</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="podcast">Podcast</string>
+    <string name="playlists">Playlists</string>
+    <string name="albums">Albums</string>
+    <string name="album">Álbum</string>
+    <string name="nombre">Nombre</string>
+    <string name="autor">Autor</string>
+    <string name="cancion">Canción</string>
+    <string name="registro">Registro</string>
 </resources>

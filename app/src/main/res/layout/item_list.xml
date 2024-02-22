@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/item_list_image"
+        android:layout_height="@dimen/item_list_image"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -19,10 +19,10 @@
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre"
-        android:textSize="16sp"
+        android:text="@string/nombre"
+        android:textSize="@dimen/common_text_size"
         android:textStyle="bold"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/common_margin"
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintTop_toTopOf="@id/imageView"
         app:layout_constraintBottom_toTopOf="@id/tvType" />
@@ -31,8 +31,8 @@
         android:id="@+id/tvType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Autor"
-        android:layout_marginStart="16dp"
+        android:text="@string/autor"
+        android:layout_marginStart="@dimen/common_margin"
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintBottom_toBottomOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/tvName"/>

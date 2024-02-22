@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/cbBack"
         app:layout_constraintStart_toStartOf="parent"
         android:src="@drawable/ic_launcher_background"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/common_margin"
         android:contentDescription="@string/imagen" />
 
     <TextView
@@ -56,10 +56,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@id/ivPlaylistSf"
         app:layout_constraintStart_toEndOf="@id/ivPlaylistSf"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/common_margin"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="Título"
+        android:textSize="@dimen/title_text_size"
+        android:text="@string/titulo"
         />
     <TextView
         android:id="@+id/tvUser"
@@ -67,8 +67,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvPlaylist"
         app:layout_constraintStart_toEndOf="@id/ivPlaylistSf"
-        android:layout_marginStart="16dp"
-        android:text="usuario"
+        android:layout_marginStart="@dimen/common_margin"
+        android:text="@string/usuario"
         />
     <TextView
         android:id="@+id/tvCanciones"
@@ -77,14 +77,14 @@
         app:layout_constraintTop_toBottomOf="@id/tvUser"
         app:layout_constraintStart_toEndOf="@id/ivPlaylistSf"
         app:layout_constraintBottom_toBottomOf="@id/ivPlaylistSf"
-        android:layout_margin="16dp"
-        android:text="123 canciones"
+        android:layout_margin="@dimen/common_margin"
+        android:text="@string/default_canciones"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSongs"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
         android:layout_marginTop="@dimen/common_padding"
         tools:listitem="@layout/item_list"
         app:layout_constraintStart_toStartOf="parent"
