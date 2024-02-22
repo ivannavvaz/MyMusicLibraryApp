@@ -50,9 +50,7 @@ class SinginFragment : Fragment() {
         getCountries()
 
         mBinding.cbBack.setOnClickListener {
-            findNavController().navigate(
-                SinginFragmentDirections.actionSinginFragmentToAuthFragment()
-            )
+            findNavController().popBackStack()
         }
 
         mBinding.etBirthDate.setOnClickListener {

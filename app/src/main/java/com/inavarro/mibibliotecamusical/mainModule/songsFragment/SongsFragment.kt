@@ -34,7 +34,7 @@ class SongsFragment : Fragment(), OnClickListener {
 
     private lateinit var mLinearlayout: LinearLayoutManager
 
-    private val idPlaylist = arguments?.getLong("idSong")
+    private var idPlaylist = arguments?.getLong("idSong")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,10 +44,11 @@ class SongsFragment : Fragment(), OnClickListener {
         mBinding = FragmentSongsBinding.inflate(inflater, container, false)
 
         mBinding.cbBack.setOnClickListener {
-            findNavController().navigate(
-                SongsFragmentDirections.actionSongsFragmentToLibraryFragment()
-            )
+            findNavController().popBackStack()
         }
+
+        idPlaylist = arguments?.getLong("idSong")
+        Log.i("ID PLAYLIST", idPlaylist.toString())
 
         return mBinding.root
     }
@@ -55,14 +56,17 @@ class SongsFragment : Fragment(), OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
         setupRecyclerView()
 
         if (idPlaylist != null) {
-            getPlaylist(idPlaylist)
-            getSongs(idPlaylist)
+            getPlaylist(idPlaylist!!)
+            getSongs(idPlaylist!!)
         }
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        Log.i("HIDDEN", hidden.toString())
     }
 
     private fun setupRecyclerView() {

@@ -87,11 +87,29 @@ class firstElementsListAdapter(private val listener: HomeFragment):
     }
 
     private fun bindPlaylist(playlist: com.inavarro.mibibliotecamusical.common.entities.Playlist, mBinding: ItemFirstElementBinding) {
-        with(mBinding) {
-            tvName.text = playlist.titulo
+
+        var titulo = playlist.titulo
+        var image = Constants.DEFAULT_PLAYLIST_IMAGE
+
+        // Replace "_" with " " in the title of the playlist if it is not the favorite playlist
+        // If it is the favorite playlist, the title is "Canciones que te gustan"
+        if (titulo != "favorita_1") {
+            titulo = titulo.replace("lista_", "")
+            titulo = titulo.replace("_", " ")
+            titulo = titulo[0].uppercase() + titulo.substring(1)
+        } else {
+            image = Constants.FAVORITE_PLAYLIST_IMAGE
+            titulo = "Canciones que te gustan"
         }
 
-        setImage("", mBinding, Constants.DEFAULT_PLAYLIST_IMAGE)
+        mBinding.tvName.text = titulo
+
+        Glide.with(context)
+            .load(image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .centerCrop()
+            .into(mBinding.imageView)
+
     }
 
     private fun setImage(imageRoute: String, mBinding: ItemFirstElementBinding, fallbackImage: String) {

@@ -61,4 +61,6 @@
     <string name="autor">Autor</string>
     <string name="cancion">Canción</string>
     <string name="registro">Registro</string>
+    <string name="mantener_sesi_n_iniciada">Mantener sesión iniciada</string>
+
 </resources>

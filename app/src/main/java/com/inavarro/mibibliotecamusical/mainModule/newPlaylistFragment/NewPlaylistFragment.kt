@@ -44,7 +44,7 @@ class NewPlaylistFragment : Fragment() {
         mActivity = activity as? MainActivity
 
         mBinding.cbBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
 
         mBinding.btnSave.setOnClickListener {
