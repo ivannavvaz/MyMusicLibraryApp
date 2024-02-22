@@ -27,7 +27,7 @@ class SongListAdapter(private val listener: OnClickListener):
 
             fun setListener(song: Song) {
                 with(binding.root) {
-                    setOnClickListener { listener.onLongClick(song) }
+                    setOnLongClickListener { listener.onLongClick(song) }
                 }
             }
         }

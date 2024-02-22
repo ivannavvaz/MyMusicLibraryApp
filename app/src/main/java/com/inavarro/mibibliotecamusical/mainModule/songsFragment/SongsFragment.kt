@@ -218,7 +218,7 @@ class SongsFragment : Fragment(), OnClickListener {
         }
     }
 
-    override fun onLongClick(songEntity: Song) {
+    override fun onLongClick(songEntity: Song):Boolean {
         if (isAlbum == false) {
             val builder = AlertDialog.Builder(requireContext())
 
@@ -237,6 +237,7 @@ class SongsFragment : Fragment(), OnClickListener {
             val alertDialog = builder.create()
             alertDialog.show()
         }
+        return true
     }
 
     private fun deleteSong(idSong: Long){
