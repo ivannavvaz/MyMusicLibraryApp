@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.common.entities.Album
@@ -19,6 +20,7 @@ import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.ItemListAdapter
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.adapters.OnClickListener
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.services.FindService
+import com.inavarro.mibibliotecamusical.mainModule.homeFragment.HomeFragmentDirections
 import com.inavarro.mibibliotecamusical.mainModule.homeFragment.adapters.PlaylistListAdapter
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
@@ -78,23 +80,19 @@ class FindFragment : Fragment(), OnClickListener {
         (activity as? MainActivity)?.showBottomSheetDialog(bundle)
     }
 
-    /*
     override fun onClick(playlist: Playlist) {
-        val fragment = SongsFragment()
-        val bundle = Bundle()
-        bundle.putLong("playlistId", playlist.id)
-        fragment.arguments = bundle
-
-        val fragmentManager = getFragmentManager()
-        val fragmentTransaction = fragmentManager?.beginTransaction()
-        if (fragmentTransaction != null) {
-            fragmentTransaction.add(com.inavarro.mibibliotecamusical.R.id.hostFragment, fragment)
-            fragmentTransaction.commit()
-
-            fragmentTransaction.addToBackStack(null)
-        }
+        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(playlist.id)
+        findNavController().navigate(action)
     }
-     */
+
+    override fun onClick(podcast: Podcast) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onClick(album: Album) {
+        TODO("Not yet implemented")
+    }
+
 
     private fun getItems() {
         val retrofit = Retrofit.Builder()

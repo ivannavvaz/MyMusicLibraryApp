@@ -14,6 +14,10 @@ import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.common.Constants
+import com.inavarro.mibibliotecamusical.common.entities.Album
+import com.inavarro.mibibliotecamusical.common.entities.Playlist
+import com.inavarro.mibibliotecamusical.common.entities.Podcast
+import com.inavarro.mibibliotecamusical.common.entities.Song
 import com.inavarro.mibibliotecamusical.databinding.ItemListBinding
 import com.inavarro.mibibliotecamusical.mainModule.findFragment.FindFragment
 import kotlin.math.roundToInt
@@ -27,14 +31,32 @@ class ItemListAdapter(private val listener: FindFragment):
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ItemListBinding.bind(view)
 
-        fun setListener(entity: Any) {
-            if (entity is com.inavarro.mibibliotecamusical.common.entities.Song) {
-                val song = entity as com.inavarro.mibibliotecamusical.common.entities.Song
-                with(binding.root) {
-                    setOnClickListener { listener.onClick(song) }
-                }
+        fun setListener(playlist: Playlist) {
+            with(binding.root) {
+                setOnClickListener { listener.onClick(playlist) }
             }
         }
+
+        fun setListener(album: Album) {
+            with(binding.root) {
+                setOnClickListener { listener.onClick(album) }
+            }
+        }
+
+        fun setListener(song: Song) {
+            with(binding.root) {
+                setOnClickListener { listener.onClick(song) }
+            }
+        }
+
+        fun setListener(podcast: Podcast) {
+            with(binding.root) {
+                setOnClickListener { listener.onClick(podcast) }
+            }
+        }
+
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -60,27 +82,29 @@ class ItemListAdapter(private val listener: FindFragment):
         }
 
         with(holder as ViewHolder) {
-            setListener(entity)
-
             when (entity) {
                 is com.inavarro.mibibliotecamusical.common.entities.Album -> {
                     // Cast entity to Album
                     val album = entity as com.inavarro.mibibliotecamusical.common.entities.Album
+                    setListener(album)
                     bindAlbum(album, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Podcast -> {
                     // Cast entity to Podcast
                     val podcast = entity as com.inavarro.mibibliotecamusical.common.entities.Podcast
+                    setListener(podcast)
                     bindPodcast(podcast, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Song -> {
                     // Cast entity to Song
                     val song = entity as com.inavarro.mibibliotecamusical.common.entities.Song
+                    setListener(song)
                     bindSong(song, binding)
                 }
                 is com.inavarro.mibibliotecamusical.common.entities.Playlist -> {
                     // Cast entity to Playlist
                     val playlist = entity as com.inavarro.mibibliotecamusical.common.entities.Playlist
+                    setListener(playlist)
                     bindPlaylist(playlist, binding)
                 }
             }

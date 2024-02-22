@@ -159,15 +159,18 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(albumEntity: Album) {
-        TODO("Not yet implemented")
+        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(albumEntity.id)
+        findNavController().navigate(action)
     }
 
     override fun onClick(playlistEntity: Playlist) {
-        TODO("Not yet implemented")
+        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(playlistEntity.id)
+        findNavController().navigate(action)
     }
 
     override fun onClick(podcastEntity: Podcast) {
-        TODO("Not yet implemented")
+        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(podcastEntity.id)
+        findNavController().navigate(action)
     }
 
     private fun getPlaylist() {

@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_findFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_findFragment_to_songsFragment"
+            app:destination="@id/songsFragment" />
     </fragment>
 
     <fragment
