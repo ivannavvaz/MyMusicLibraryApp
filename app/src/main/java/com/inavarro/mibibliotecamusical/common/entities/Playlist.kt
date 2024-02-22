@@ -1,5 +1,6 @@
 package com.inavarro.mibibliotecamusical.common.entities
 
+import com.inavarro.mibibliotecamusical.common.Constants
 import java.util.Date
 
 data class Playlist(
@@ -12,6 +13,17 @@ data class Playlist(
 ) {
 
     override fun toString(): String {
-        return titulo
+
+        var tituloModificado = ""
+
+        if (titulo != "favorita_1") {
+            tituloModificado = titulo.replace("lista_", "")
+            tituloModificado = tituloModificado.replace("_", " ")
+            tituloModificado = tituloModificado[0].uppercase() + tituloModificado.substring(1)
+        } else {
+            tituloModificado = "Canciones que te gustan"
+        }
+
+        return tituloModificado
     }
 }
