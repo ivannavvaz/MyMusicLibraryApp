@@ -176,7 +176,7 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(podcastEntity: Podcast) {
-        val action = HomeFragmentDirections.actionHomeFragmentToSongsFragment(podcastEntity.id)
+        val action = HomeFragmentDirections.actionHomeFragmentToEpisodesFragment(podcastEntity.id)
         findNavController().navigate(action)
     }
 

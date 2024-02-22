@@ -86,7 +86,7 @@ class FindFragment : Fragment(), OnClickListener {
     }
 
     override fun onClick(podcast: Podcast) {
-        val action = FindFragmentDirections.actionFindFragmentToSongsFragment(podcast.id)
+        val action = FindFragmentDirections.actionFindFragmentToEpisodesFragment(podcast.id)
         findNavController().navigate(action)
     }
 

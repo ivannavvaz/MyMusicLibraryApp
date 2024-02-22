@@ -26,9 +26,7 @@ class SongListAdapter(private val listener: OnClickListener):
             val binding = ItemListBinding.bind(view)
 
             fun setListener(song: Song) {
-                with(binding.root) {
-                    setOnClickListener { listener.onClick(song) }
-                }
+
             }
         }
 

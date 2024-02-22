@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -37,6 +38,10 @@ class EpisodesFragment : Fragment() {
         // Inflate the layout for this fragment
         mBinding = FragmentEpisodesBinding.inflate(inflater, container, false)
         idPodcast = arguments?.getLong("idPodcast")
+
+        mBinding.cbBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return mBinding.root
     }

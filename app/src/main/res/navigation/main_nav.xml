@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_songsFragment"
             app:destination="@id/songsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_episodesFragment"
+            app:destination="@id/episodesFragment" />
     </fragment>
 
     <fragment
@@ -35,6 +38,9 @@
         <action
             android:id="@+id/action_findFragment_to_songsFragment"
             app:destination="@id/songsFragment" />
+        <action
+            android:id="@+id/action_findFragment_to_episodesFragment"
+            app:destination="@id/episodesFragment" />
     </fragment>
 
     <fragment
@@ -85,6 +91,28 @@
             app:destination="@id/homeFragment" />
         <argument
             android:name="idSong"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_songsFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/episodesFragment"
+        android:name="com.inavarro.mibibliotecamusical.mainModule.episodesFragment.EpisodesFragment"
+        android:label="fragment_episodes"
+        tools:layout="@layout/fragment_episodes" >
+        <action
+            android:id="@+id/action_episodesFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_episodesFragment_to_findFragment"
+            app:destination="@id/findFragment" />
+        <action
+            android:id="@+id/action_episodesFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+        <argument
+            android:name="idPodcast"
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
