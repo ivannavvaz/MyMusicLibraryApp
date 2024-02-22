@@ -48,7 +48,7 @@ class SongsFragment : Fragment(), OnClickListener {
             findNavController().popBackStack()
         }
 
-        isAlbum = arguments?.getBoolean("isAlbum")
+        isAlbum = arguments?.getBoolean("album")
         idEntity = arguments?.getLong("idSong")
 
         return mBinding.root
