@@ -222,20 +222,19 @@ class SongsFragment : Fragment(), OnClickListener {
         if (isAlbum == false) {
             val builder = AlertDialog.Builder(requireContext())
 
-            val dialogView = layoutInflater.inflate(R.layout.dialog, null)
-
-            builder.setView(dialogView)
-
-                .setPositiveButton("Eliminar") { _, _ ->
-                    deleteSong(songEntity.id)
-
-                }
-                .setNegativeButton("Cancelar") { _, _ ->
-
-                }
-
             val alertDialog = builder.create()
             alertDialog.show()
+
+            builder.setTitle("Confirmacion")
+            builder.setMessage("¿Estás seguro de que quieres eliminar esta canción?")
+            builder.setPositiveButton("Eliminar") { _, _ ->
+                deleteSong(songEntity.id)
+            }
+            builder.setNegativeButton("Cancelar") { _, _ ->
+
+            }
+
+            builder.show()
         }
         return true
     }
@@ -257,7 +256,7 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 Log.i("DELETE RESULT", result.toString())
 
-                Toast.makeText(requireContext(), "Playlist eliminada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Canción eliminada", Toast.LENGTH_SHORT).show()
 
                 getSongs(idEntity!!)
 
