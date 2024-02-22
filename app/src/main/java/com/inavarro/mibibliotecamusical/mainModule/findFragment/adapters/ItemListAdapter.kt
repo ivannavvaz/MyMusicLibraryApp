@@ -114,7 +114,7 @@ class ItemListAdapter(private val listener: FindFragment):
     private fun bindAlbum(album: com.inavarro.mibibliotecamusical.common.entities.Album, mBinding: ItemListBinding) {
         with(mBinding) {
             tvName.text = album.titulo
-            tvType.text = R.string.album.toString()
+            tvType.text = context.getString(R.string.album)
         }
 
         setImage(album.imagen, mBinding, Constants.DEFAULT_ALBUM_IMAGE)
@@ -124,7 +124,7 @@ class ItemListAdapter(private val listener: FindFragment):
     private fun bindPodcast(podcast: com.inavarro.mibibliotecamusical.common.entities.Podcast, mBinding: ItemListBinding) {
         with(mBinding) {
             tvName.text = podcast.titulo
-            tvType.text = R.string.podcast.toString()
+            tvType.text = context.getString(R.string.podcast)
         }
 
         var imageRoute = podcast.titulo.replace(" ", "-").lowercase().replace("á", "a")
@@ -137,7 +137,7 @@ class ItemListAdapter(private val listener: FindFragment):
     private fun bindSong(song: com.inavarro.mibibliotecamusical.common.entities.Song, mBinding: ItemListBinding) {
         with(mBinding) {
             tvName.text = song.titulo
-            tvType.text = R.string.cancion.toString()
+            tvType.text = context.getString(R.string.cancion)
         }
         setImage(song.album.imagen, mBinding, Constants.DEFAULT_SONG_IMAGE)
     }
