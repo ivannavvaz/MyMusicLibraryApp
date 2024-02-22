@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="176dp"
-    android:layout_height="218dp"
+    android:layout_width="@dimen/item_album_width"
+    android:layout_height="@dimen/item_album_height"
     android:paddingEnd="@dimen/common_padding"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
     <ImageView
         android:id="@+id/ivAlbum"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="@dimen/item_album_image"
+        android:layout_height="@dimen/item_album_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_min_margin"
-        android:maxLines="1"
+        android:maxLines="@dimen/weight_one"
         android:textSize="@dimen/common_text_size"
         android:text="@string/nombre_del_album"
         app:layout_constraintTop_toBottomOf="@id/ivAlbum"
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:maxLines="1"
+        android:maxLines="@dimen/weight_one"
         android:textColor="@color/md_theme_dark_outline"
         />
 

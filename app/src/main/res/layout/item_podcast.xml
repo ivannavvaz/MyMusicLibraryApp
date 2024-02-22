@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivPodcast"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/item_podcast_image"
+        android:layout_height="@dimen/item_podcast_image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,9 +17,9 @@
 
     <TextView
         android:id="@+id/tvPodcastName"
-        android:layout_width="0dp"
+        android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/common_min_margin"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="@string/nombre_del_podcast"

@@ -8,8 +8,8 @@
 
     <View
         android:id="@+id/idViewTop"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/idCardView"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvPlaylists"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="@dimen/recyclerView_height"
                 tools:listitem="@layout/item_list" />
 
             <Button
@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rvPlaylists"
-                android:layout_margin="10dp"
-                android:text="Cancelar"
+                android:layout_margin="@dimen/chip_margin"
+                android:text="@string/cancelar"
                 android:textAllCaps="false" />
 
         </RelativeLayout>
