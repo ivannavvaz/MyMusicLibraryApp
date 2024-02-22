@@ -8,7 +8,7 @@ data class Podcast(
     val imagen: String,
     val description: String,
     val anyo: Date,
-    val usuario: User
+    val usuario: MutableList<User>
 ) {
 
     override fun toString(): String {

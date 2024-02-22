@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.common.Constants
 import com.inavarro.mibibliotecamusical.databinding.FragmentEpisodesBinding
 import com.inavarro.mibibliotecamusical.mainModule.episodesFragment.adapters.EpisodeListAdapter
@@ -69,6 +71,7 @@ class EpisodesFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getPodcast(id: Long){
         val retrofit = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
@@ -89,18 +92,41 @@ class EpisodesFragment : Fragment() {
                 var image = Constants.DEFAULT_PLAYLIST_IMAGE
 
                 mBinding.tvPlaylist.text = titulo
-                mBinding.tvUser.text = podcast.usuario.username
+                mBinding.tvUser.text = "Podcast"
 
-                context?.let {
-                    Glide.with(it)
-                        .load(image)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerCrop()
-                        .into(mBinding.ivPlaylistSf)
+                var imageRoute = podcast.titulo.replace(" ", "-").lowercase().replace("á", "a")
+                    .replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
+                imageRoute = "/img/podcast/$imageRoute.png"
+
+
+                val storage = Firebase.storage
+                val storageRef = storage.reference
+
+
+
+                storageRef.child(imageRoute).downloadUrl.addOnSuccessListener {
+                    context?.let { it1 ->
+                        Glide.with(it1)
+                            .load(it)
+                            .circleCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(mBinding.ivPlaylistSf)
+                    }
+                }.addOnFailureListener {
+                    context?.let { it1 ->
+                        Glide.with(it1)
+                            .load(Constants.DEFAULT_PODCAST_IMAGE)
+                            .circleCrop()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(mBinding.ivPlaylistSf)
+                    }
                 }
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())
+                Log.d("SET PLAYLIST ERROR", e.stackTraceToString())
             }
         }
     }
@@ -118,7 +144,7 @@ class EpisodesFragment : Fragment() {
 
             try {
 
-                val result = service.getEpisodes(id) //Aquí va id
+                val result = service.getEpisodes(id)
 
                 val episodes = result.body()!!
 
@@ -126,7 +152,8 @@ class EpisodesFragment : Fragment() {
                 mBinding.tvCanciones.text = "${episodes.size} capítulos"
 
             } catch (e: Exception) {
-                Log.e("SET PLAYLIST ERROR", e.message.toString())
+                Log.e("SET PODCAST ERROR", e.message.toString())
+                Log.d("SET PODCAST ERROR", e.stackTraceToString())
             }
         }
     }
