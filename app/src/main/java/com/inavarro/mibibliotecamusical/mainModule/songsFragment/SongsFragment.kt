@@ -62,6 +62,7 @@ class SongsFragment : Fragment(), OnClickListener {
         setupRecyclerView()
 
         if (isAlbum == true) {
+            mBinding.toolbar.setTitle(R.string.album)
             getAlbum(idEntity!!)
             getSongs(idEntity!!)
         } else {
