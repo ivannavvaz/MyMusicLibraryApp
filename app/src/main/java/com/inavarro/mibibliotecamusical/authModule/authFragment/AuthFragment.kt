@@ -1,6 +1,5 @@
 package com.inavarro.mibibliotecamusical.authModule.authFragment
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.inavarro.mibibliotecamusical.R
-import com.inavarro.mibibliotecamusical.authModule.AuthActivity
 import com.inavarro.mibibliotecamusical.databinding.FragmentAuthBinding
-import com.inavarro.mibibliotecamusical.mainModule.MainActivity
 
 class AuthFragment : Fragment() {
 
@@ -66,7 +63,7 @@ class AuthFragment : Fragment() {
         }
 
         Glide.with(this)
-            .load("https://www.freepnglogos.com/uploads/spotify-logo-png/spotify-icon-marilyn-scott-0.png")
+            .load(R.raw.icon)
             .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(mBinding.ivLogo)
