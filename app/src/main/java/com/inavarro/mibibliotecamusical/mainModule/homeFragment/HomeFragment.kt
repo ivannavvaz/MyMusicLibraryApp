@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -51,6 +52,12 @@ class HomeFragment : Fragment(), OnClickListener {
         savedInstanceState: Bundle?
     ): View {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false)
+
+
+        val layoutparams = mBinding.vStatusBar.layoutParams as ViewGroup.MarginLayoutParams
+        layoutparams.setMargins(0, 0, 0, 0)
+        mBinding.vStatusBar.layoutParams = layoutparams
+
 
         return mBinding.root
     }
