@@ -14,6 +14,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.inavarro.mibibliotecamusical.R
 import com.inavarro.mibibliotecamusical.UserApplication
 import com.inavarro.mibibliotecamusical.common.Constants
@@ -148,19 +150,35 @@ class SongsFragment : Fragment(), OnClickListener {
 
                 val album = result.body()!!
 
-                var titulo = album.titulo
-                var image = Constants.DEFAULT_PLAYLIST_IMAGE
+                val titulo = album.titulo
+                var image = album.imagen
 
                 mBinding.tvPlaylist.text = titulo
-                mBinding.tvUser.text = album.usuario.username
 
-                context?.let {
-                    Glide.with(it)
-                        .load(image)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .centerCrop()
-                        .into(mBinding.ivPlaylistSf)
+                val storageRef = Firebase.storage.reference
+                storageRef.child(image).downloadUrl.addOnSuccessListener {
+                    context?.let { it1 ->
+                        Glide.with(it1)
+                            .load(it)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(mBinding.ivPlaylistSf)
+                    }
+                }.addOnFailureListener {
+                    context?.let { it1 ->
+                        Glide.with(it1)
+                            .load(Constants.DEFAULT_ALBUM_IMAGE)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .centerCrop()
+                            .into(mBinding.ivPlaylistSf)
+                    }
                 }
+
+                mBinding.tvUser.text = album.artista.nombre
+
+                Log.e("ALBUM IMAGE", image)
+                Log.e("ALBUM TITULO", titulo)
+                Log.e("ALBUM USUARIO", album.usuario.username)
 
             } catch (e: Exception) {
                 Log.e("SET PLAYLIST ERROR", e.message.toString())

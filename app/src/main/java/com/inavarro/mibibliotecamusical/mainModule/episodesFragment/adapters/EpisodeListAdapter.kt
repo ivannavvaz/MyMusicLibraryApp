@@ -52,9 +52,13 @@ class EpisodeListAdapter(podcast: EpisodesFragment):
 
             with(holder as ViewHolder) {
 
+                var imageRoute = episode.podcast.titulo.replace(" ", "-").lowercase().replace("á", "a")
+                    .replace("é", "e").replace("í", "i").replace("ó", "o").replace("ú", "u")
+                imageRoute = "/img/podcast/$imageRoute.png"
+
                 val storageRef = Firebase.storage.reference
 
-                storageRef.child(episode.podcast.imagen).downloadUrl.addOnSuccessListener {
+                storageRef.child(imageRoute).downloadUrl.addOnSuccessListener {
                     Glide.with(context)
                         .load(it)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
